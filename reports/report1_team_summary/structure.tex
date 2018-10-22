@@ -17,7 +17,7 @@
 \usepackage{geometry} % Required for adjusting page dimensions and margins
 
 \geometry{
-	paper=a4paper, % Change to letterpaper for US letter
+	paper=a4paper, % Change to letter paper for US letter
 	top=3cm, % Top margin
 	bottom=3cm, % Bottom margin
 	left=2.5cm, % Left margin
@@ -34,7 +34,6 @@
 
 \usepackage[utf8]{inputenc} % Required for inputting international characters
 \usepackage[T1]{fontenc} % Output font encoding for international characters
-
 \usepackage[sfdefault,light]{roboto} % Use the Roboto font
 
 %----------------------------------------------------------------------------------------
@@ -55,106 +54,6 @@
 \rfoot{\small Page\ \thepage\ of\ \pageref{LastPage}} % Right footer
 
 \renewcommand\headrulewidth{0.5pt} % Thickness of the header rule
-
-%----------------------------------------------------------------------------------------
-%	MODIFY SECTION STYLES
-%----------------------------------------------------------------------------------------
-
-\usepackage{titlesec} % Required for modifying sections
-
-%------------------------------------------------
-% Section
-
-\titleformat
-{\section} % Section type being modified
-[block] % Shape type, can be: hang, block, display, runin, leftmargin, rightmargin, drop, wrap, frame
-{\Large\bfseries} % Format of the whole section
-{\reportQuestionName~\thesection} % Format of the section label
-{6pt} % Space between the title and label
-{} % Code before the label
-
-\titlespacing{\section}{0pt}{0.5\baselineskip}{0.5\baselineskip} % Spacing around section titles, the order is: left, before and after
-
-%------------------------------------------------
-% Subsection
-
-\titleformat
-{\subsection} % Section type being modified
-[block] % Shape type, can be: hang, block, display, runin, leftmargin, rightmargin, drop, wrap, frame
-{\itshape} % Format of the whole section
-{(\alph{subsection})} % Format of the section label
-{4pt} % Space between the title and label
-{} % Code before the label
-
-\titlespacing{\subsection}{0pt}{0.5\baselineskip}{0.5\baselineskip} % Spacing around section titles, the order is: left, before and after
-
-\renewcommand\thesubsection{(\alph{subsection})}
-
-%----------------------------------------------------------------------------------------
-%	CUSTOM QUESTION COMMANDS/ENVIRONMENTS
-%----------------------------------------------------------------------------------------
-
-% Environment to be used for each question in the report
-\newenvironment{question}{
-	\vspace{0.5\baselineskip} % Whitespace before the question
-	\section{} % Blank section title (e.g. just Question 2)
-	\lfoot{\small\itshape\reportQuestionName~\thesection~continued on next page\ldots} % Set the left footer to state the question continues on the next page, this is reset to nothing if it doesn't (below)
-}{
-	\lfoot{} % Reset the left footer to nothing if the current question does not continue on the next page
-}
-
-%------------------------------------------------
-
-% Environment for subquestions, takes 1 argument - the name of the section
-\newenvironment{subquestion}[1]{
-	\subsection{#1}
-}{
-}
-
-%------------------------------------------------
-
-% Command to print a question sentence
-\newcommand{\questiontext}[1]{
-	\textbf{#1}
-	\vspace{0.5\baselineskip} % Whitespace afterwards
-}
-
-%------------------------------------------------
-
-% Command to print a box that breaks across pages with the question answer
-\newcommand{\answer}[1]{
-	\begin{tcolorbox}[breakable, enhanced]
-		#1
-	\end{tcolorbox}
-}
-
-%------------------------------------------------
-
-% Command to print a box that breaks across pages with the space for a student to answer
-\newcommand{\answerbox}[1]{
-	\begin{tcolorbox}[breakable, enhanced]
-		\vphantom{L}\vspace{\numexpr #1-1\relax\baselineskip} % \vphantom{L} to provide a typesetting strut with a height for the line, \numexpr to subtract user input by 1 to make it 0-based as this command is
-	\end{tcolorbox}
-}
-
-%------------------------------------------------
-
-% Command to print an report section title to split an report into major parts
-\newcommand{\reportSection}[1]{
-	{
-		\centering % Center the section title
-		\vspace{2\baselineskip} % Whitespace before the entire section title
-		
-		\rule{0.8\textwidth}{0.5pt} % Horizontal rule
-		
-		\vspace{0.75\baselineskip} % Whitespace before the section title
-		{\LARGE \MakeUppercase{#1}} % Section title, forced to be uppercase
-		
-		\rule{0.8\textwidth}{0.5pt} % Horizontal rule
-		
-		\vspace{\baselineskip} % Whitespace after the entire section title
-	}
-}
 
 %----------------------------------------------------------------------------------------
 %	TITLE PAGE
