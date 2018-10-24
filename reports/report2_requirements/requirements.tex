@@ -1,0 +1,156 @@
+\documentclass[11pt]{article}
+
+\input{../structure/structure.tex} % Include the file specifying the document structure and custom commands
+
+\usepackage[backend=biber, style=ieee]{biblatex}
+\addbibresource{sources.bib}
+\usepackage{etoolbox}
+\patchcmd{\thebibliography}{\section*{\refname}}{}{}{}
+
+% Used for fixed column size
+\usepackage{array, multirow, graphicx, longtable}
+\newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+%----------------------------------------------------------------------------------------
+%	PROJECT INFORMATION
+%----------------------------------------------------------------------------------------
+
+% Required
+\newcommand{\reportClass}{ENG4000} % Course Code
+\newcommand{\reportTitle}{Requirements Review Document} % Report Title
+\newcommand{\classInstructor}{Dr. Franz Newland} % Instructor Name
+\newcommand{\reportProject}{Creating a database solution for the UNESCO Chair Research \#IndigenousESD} % Our Project
+\newcommand{\reportDueDate}{Tuesday, September 25 2018} % Due date
+
+\begin{document}
+
+%----------------------------------------------------------------------------------------
+%	TITLE PAGE
+%----------------------------------------------------------------------------------------
+
+\maketitle % Print the title page
+
+\thispagestyle{empty} % Suppress headers and footers on the title page
+
+\newpage
+\tableofcontents
+\newpage
+
+%----------------------------------------------------------------------------------------
+%	REPORT BODY
+%----------------------------------------------------------------------------------------
+
+\section{Introduction}
+
+The following document contains list of requirements for \textit{Creating a Database Solution for the UNESCO Chair #indigenousESD} project. The requirements have been extracted by a thorough analysis of the Statement of Work provided to us for the project. We expect an improved comprehension of the requirements outlined in the SoW as a result of the upcoming meeting with our client, therefore the requirement definitions presented in this document are subject to change.
+
+\section{System Requirements}
+
+\begin{longtable}{| C{1cm} | L{4.33cm} | L{4.33cm} | L{4.34cm} |}
+        \hline
+        \multicolumn{1}{| C{1cm} |}{} & \multicolumn{1}{L{4.33cm}|}{\textbf{Requirements Text}} & \multicolumn{1}{L{4.33cm}|}{\textbf{Source}} & \multicolumn{1}{L{4.33cm}|}{\textbf{Validation \& Timing}} 
+        \\ \hline
+
+        \parbox[t]{2mm}{\multirow{3}{*}{\rotatebox[origin=c]{90}{\textbf{Functionality}}}} &
+
+        The application must have the ability to import data from MS Outlook, MS Word, and MS Excel files.  &
+        Project SoW, Number 1: 
+        “Moving the information into a database, preferably with an interface to Microsoft Outlook to store information from emails/calendars/ reminders” &
+        The validation will be performed while application logic is tested - specifically the import phase. The requirement is achieved if the various file formats are completely imported without data loss.  &
+        \cline{2-4}
+
+        &
+        The application must accept research data as input from users and store the data in a database. &
+        Project SoW, Number 2: “Developing/finding a software-based solution to manage the process and receipt of research data that is currently managed through Word/Excel...” &
+        This requirement can be validated at the testing stage of the project cycle. Mock values will be inserted to ensure correct storage functionality. &
+        \cline{2-4}
+
+        &
+        The application must analyze meaningful links amongst the data, determine patterns and use them to display the data and their correlations. &
+        Project SoW, Number 3: “Developing a framework and tools for mining, cross correlating andtabulating the data”. &
+        The validation for this requirement can be done after the implementation of the front end since the result of data mining will be displayed at the front end. &
+        \cline{2-4}
+
+        &
+        The application must continue to offer offline services when it cannot connect to the internet. &
+        Project SoW: First constraint in Constraints section. &
+        The validation for this requirement can be performed during the testing stage. We remove internet access from our platform and ensure the application’s offline services remain functional. &
+        \hline
+
+        \parbox[t]{2mm}{\multirow{3}{*}{\rotatebox[origin=c]{90}{\textbf{Interface}}}} &
+        The application must display relevant correlation or patterns within the data set. &
+        Project SoW, Number 3: “provide interactive visualizations.” &
+        Following the development of the front end, the display can be validated. This is expected to be validated near the end of the project. &
+        \cline{2-4}
+
+        &
+        The application must have a mobile and desktop interface with identical functionality. &
+        Project SoW: Third constraint in Constraints section.  & 
+        The validation will be performed when the user interface is tested. This requirement is validated if desired functionality is achieved in both mobile and desktop views.
+ &
+        \cline{2-4}
+
+        &
+        The application must support translations of all UNESCO supported languages to all user interfaces. &
+        Project SoW: (“...global research involves 130 institutions from 40 countries...”)&
+        Earliest validation is during user interface testing. This requirement is validated if every string in the interface can be translated to any UNESCO supported language. &
+        \cline{2-4}
+
+        &
+        The application’s interface must accommodate users with little to no proficiency in IT. &
+        Project SoW: First constraint in Constraints section. &
+        This requirement can be validated in the beta testing stage, where we gather testing and input data from the public. &
+        \hline
+
+
+        \parbox[t]{2mm}{\multirow{3}{*}{\rotatebox[origin=c]{90}{\textbf{Performance}}}} &
+        The application must support a minimum of 130 concurrent users, allowing for a performance decrease of one second or less for regular application operation.  &
+        Project SoW: (“...global research involves 130 institutions from 40 countries...”) &
+        Validation will occur in the testing stage in the form of stress testing. We can simulate a high traffic scenario to ensure the system remains performant.  &
+        \hline
+
+        \parbox[t]{2mm}{\multirow{3}{*}{\rotatebox[origin=c]{90}{\textbf{Regulation}}}} &
+        Information stored by the application must abide by the specific privacy regulations of the countries involved. An example of a privacy regulation is the GDPR (General Data Protection Regulation) which prevents only necessary user data to be requested. \cite{gdpr} &
+        Project SoW: (“..global research involves 130 institutions from 40 countries..”) Countries have varying online content restrictions by which we must abide.  &
+        Validation to occur by accessing web services through each country. Further validation is to prevent sensitive information from being stored unless necessary.  &
+        \cline{2-4}
+
+        &
+        Data received by the application from all potential sources of input must be validated to protect against a broad range of attacks. \cite{security} &
+        Project SoW: “Moving the information into a database, preferably with an interface to Microsoft Outlook to store information from emails/calendars/ reminders”.  &
+        The validation will take place in Integration testing phase against the positive specifications of what requests should be allowed.  &
+        \cline{2-4}
+
+        &
+        A session management mechanism shall be used to enforce session timeouts for inactive sessions. \cite{security} &
+        Project SoW: “Web-based solution is preferred as project coordinators from all UN regions shall access the data through internet.” &
+        Validation will occur in the unit testing stage on different browsers to make sure it complies with different session management setups.  &
+        \cline{2-4}
+
+        &
+        A secure user-event auditing mechanism shall be implemented. \cite{security} &
+        Project SoW: “Developing/finding a software-based solution to manage the process and receipt of research data” &
+        Validation will occur in the unit testing phase while adding each function and ensuring  they are audited against the correct user.  &
+        \hline
+
+
+        \parbox[t]{2mm}{\multirow{3}{*}{\rotatebox[origin=c]{90}{\textbf{Process}}}} &
+        The application must maximize the use of open source technology in its development. Open source software is defined as software that can be modified, shared and easily accessible to the public to promote the principles of collaboration, open exchange and transparency. \cite{open} &
+        Project SoW: Second constraint in Constraints section.  &
+        Validation will occur during the initial development of the application, as the development process should consist of using open source software. The requirement is successfully fulfilled if the software chosen to develop the application is open source (or primarily open source) and does not require large costs.  &
+        \cline{2-4}
+
+        &
+        A structured and user friendly error/warring handling approach shall be used to make it improve user experience. \cite{security} &
+        Project SoW: “create a CRM-like (i.e. COBRA) but easy-to-handle solution.” &
+        Validation will occur during the acceptance testing phase making sure users can navigate through the service without any deadlocks due to poor error handling.  &
+        \hline
+
+\end{longtable}
+
+
+\newpage
+\section{Bibliography}
+\printbibliography
+
+\end{document}

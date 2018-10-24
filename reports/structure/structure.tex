@@ -1,0 +1,77 @@
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\setlength\parindent{0pt} % Removes all indentation from paragraphs
+\usepackage{lastpage} % Required to determine the last page number for the footer
+\usepackage{graphicx} % Required to insert images
+\usepackage[most]{tcolorbox} % Required for boxes that split across pages
+\usepackage{booktabs} % Required for better horizontal rules in tables
+\usepackage{listings} % Required for insertion of code
+\usepackage{etoolbox} % Required for if statements
+
+%----------------------------------------------------------------------------------------
+%	MARGINS
+%----------------------------------------------------------------------------------------
+
+\usepackage{geometry} % Required for adjusting page dimensions and margins
+
+\geometry{
+	paper=a4paper, % Change to letter paper for US letter
+	top=3cm, % Top margin
+	bottom=3cm, % Bottom margin
+	left=2.5cm, % Left margin
+	right=2.5cm, % Right margin
+	headheight=14pt, % Header height
+	footskip=1.4cm, % Space from the bottom margin to the baseline of the footer
+	headsep=1.2cm, % Space from the top margin to the baseline of the header
+	%showframe, % Uncomment to show how the type block is set on the page
+}
+
+%----------------------------------------------------------------------------------------
+%	FONT
+%----------------------------------------------------------------------------------------
+
+\usepackage[utf8]{inputenc} % Required for inputting international characters
+\usepackage[T1]{fontenc} % Output font encoding for international characters
+\usepackage[sfdefault,light]{roboto} % Use the Roboto font
+
+%----------------------------------------------------------------------------------------
+%	HEADERS AND FOOTERS
+%----------------------------------------------------------------------------------------
+
+\usepackage{fancyhdr} % Required for customizing headers and footers
+
+\pagestyle{fancy} % Enable custom headers and footers
+
+\lhead{\small\reportClass: \reportTitle} % Left header; output the instructor in brackets if one was set
+\chead{} % Center header
+%\rhead{\small\ifdef{\authorOne}{\authorOne}{\ifdef{\reportDueDate}{Due\ \reportDueDate}{}}} % Right header; output the author name if one was set, otherwise the due date if that was set
+\rhead{UNESCO Database Solution}
+
+\lfoot{} % Left footer
+\cfoot{} % Center footer
+\rfoot{\small Page\ \thepage\ of\ \pageref{LastPage}} % Right footer
+
+\renewcommand\headrulewidth{0.5pt} % Thickness of the header rule
+
+%----------------------------------------------------------------------------------------
+%	TITLE PAGE
+%----------------------------------------------------------------------------------------
+
+%\usepackage{authblk}
+
+\author{\textbf{Andrew Ferreira} \\ \textbf{Asma Hassan} \\ \textbf{Dan Sheng} \\ \textbf{Eric Dao} \\ \textbf{Shahriar Dhrubo}} % Set the default title page author field
+\date{} % Don't use the default title page date field
+
+\title{
+	\thispagestyle{empty} % Suppress headers and footers
+	\vspace{0.2\textheight} % Whitespace before the title
+	\textbf{\reportClass:\ \reportTitle}\\[-4pt]
+	\ifdef{\reportProject}{{\large \reportProject}\\}{} % If a due date is supplied, output it
+	\ifdef{\reportDueDate}{{\small Due\ on\ \reportDueDate}\\}{} % If a due date is supplied, output it
+	\ifdef{\reportClassInstructor}{{\large \textit{\reportClassInstructor}}}{} % If an instructor is supplied, output it
+	\vspace{0.22\textheight} % Whitespace before the author name
+}
+
+
