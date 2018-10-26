@@ -5,7 +5,7 @@ from flask import Flask, render_template, request, current_app, redirect
 
 app = Flask(__name__)
 
-DB = "/home/tea/School/2018F/ENG4000/Prototype/flask.db"
+DB = "flask.db"
 
 @app.route('/')
 def main():
