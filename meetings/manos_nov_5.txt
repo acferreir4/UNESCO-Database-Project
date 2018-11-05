@@ -1,0 +1,36 @@
+ENG 4000 Meeting Notes
+November 05, 2018
+Manos Papangelis Meeting
+----------------
+
+Problem/Requirements Refinement:
+- Encourages us to think about the need for our database solution, suggests looking into Google Forms, Survey Monkey, etc. 
+    - Katrin subsequently clarified the need for our solution:
+        - Region/Country data restrictions
+        - Simplicity and Responsiveness for low bandwidth areas.
+
+- Dynamic questions and answers is a complex problem.
+    - Requires abstract thinking about what a generic question/answer is.
+    - Adding new questions/answers will likely propagate throughout the system
+        (i.e. database modifications, modifications to views, etc.)
+    
+
+Discussion on Techs:
+- MySQL & PostgreSQL
+    - Suggested we use PostgreSQL, but said it can be done with both.
+
+- Django & Flask
+    - Manos has used Django and thinks it's a suitable choice for our needs, 
+    - Hasn't heard of Flask.
+
+
+Deliverables:
+- To Manos:
+    - Our resumes.
+    - Our delivered documents thus far in the course.
+
+
+Future Meetings:
+- Suggested in the future we set up monthly meetings.
+- Remain on the fly for now.
+- We are free to drop by anytime to ask questions.

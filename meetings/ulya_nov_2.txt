@@ -1,0 +1,18 @@
+ENG 4000 Meeting Notes
+November 02, 2018
+Ulya Yigit Meeting
+----------------
+
+- She can provide us with a test server. 
+- Recommend that we clarify about Katrin's agreement with the school.
+- Suggested that we speak with Manos/Ostroff with regards to hosting our test server.
+
+Made the following decisions:
+- No need for front-end framework (i.e. AngularJS, React) (Dj
+    - Django and Flask can handle front-end dev with just Bootstrap
+- MariaDB vs PostgreSQL
+    - Need to figure out hardware requirements for each option
+        - RAM and storage
+
+
+
