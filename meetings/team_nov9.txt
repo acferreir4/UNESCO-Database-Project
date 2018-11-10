@@ -1,0 +1,53 @@
+ENG 4000 Meeting Notes
+November 09, 2018
+Team Meeting
+----------------
+
+CDR discussion
+
+Each must do:
+- Team member statement
+    - detailing your contribution to the CDR and to the project as a whole
+
+Andrew
+- Executive Summary
+    - standalone 1-page document, 
+- Updated work breakdown structure
+    - needs to be reflected in Gantt chart/allocation matrix
+- Updated work package descriptions
+    - needs to be reflected in Gantt chart/allocation matrix
+- Design: Database as consultant
+- Final editing
+
+Eric
+- Updated risk register
+- Design Baseline
+    - Use Cases
+    - Architecture
+- Data Flow diagram
+- Helping with Trade study identification
+- Update Equipment Travel w.e
+
+Asma
+- Updated resource allocation matrix
+    - make use of our work packages
+- Updated project schedule
+    - make use of our work packages
+- Design Baseline
+    - Use Cases
+
+Shahriar
+- Requirements review
+    - add forum requirements that Katrin discussed with us in Skype.
+- Baseline Design
+    - Database schema
+
+Dan
+- Trade study identification
+- Baseline Design
+    - Architecture
+- Baseline design compliance analysis
+    - tech choices and justification
+    - hardware requirements
+
+
