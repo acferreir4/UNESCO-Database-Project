@@ -1,0 +1,39 @@
+ENG 4000 Meeting Notes
+November 20, 2018
+Joel Chretien Meeting
+----------------
+
+Database schema suggestions:
+- Forum
+    - Ditch ThreadXML, expensive and pointless to update xml of thread, instead create runtime export function.
+    - Can probably ditch last updated and timestamp, Django has pre-determined fields in each table (created_at and updated_at), can use those instead.
+        - same goes for all tables where we want to know when something has been updated/created
+    - ThreadPosts: might want to reply to a threadpost, therefore include ParentThreadPostID to track which post a user is replying to. Self-reference in table.
+
+- Question/Answers
+    - Need supported question/answer types from Katrin.
+    - Answers table
+        - Store answers as text.
+    - Questions table
+        - contains answer type
+        - need auxiliary table to hold multiple choice options
+
+Deployment:
+- DigitalOcean vs Heroku vs AWS
+    - DigitalOcean most work/trickiest to get up and running, cheaper, we get to learn devOps stuff.
+    - Heroku easier apparently, little more expensive.
+    - Dokku (Docker powered mini-Heroku), can be used with both.
+    - AWS Lambda pretty cheap, only pay for compute time, so pay nothing when you aren't seeing traffic.
+    - Think about who will be maintaining this system when we're gone, should influence our decision.
+        - If it's not any of us, will need to write appropriate documentation to bring other devs up to speed with regards to development, 
+
+WBS:
+- Iterative approach using Continuous Integration and Continuous Deployment (CI/CD)
+- TravisCI, CircleCI free for open-source github projects, need to determine if this is open-source to see if we can leverage their freeness.
+- Set up a continuous deployment workflow, so that deployment becomes less of a headache in the long run.
+
+Test Readiness Doc:
+- would like to talk to us about testing when the time comes, future meeting to be set sometime in January
+    
+
+
