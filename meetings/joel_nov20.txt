@@ -35,5 +35,6 @@ WBS:
 Test Readiness Doc:
 - would like to talk to us about testing when the time comes, future meeting to be set sometime in January
     
+***Don't get burned by timezones. Store all data as UTC, display according to user's timezone.
 
 
