@@ -38,10 +38,15 @@ Asma
 
 Shahriar
 - Requirements review
+    - update the Validation Approaches and update the Timing
+    - Link it to Use case.
     - add forum requirements that Katrin discussed with us in Skype.
+    - add client-admin Chat requirement.
 - Baseline Design
     - Database schema
-
+    - Make a demo video/doc
+    - Create DB descriptions
+    
 Dan
 - Trade study identification
 - Baseline Design
