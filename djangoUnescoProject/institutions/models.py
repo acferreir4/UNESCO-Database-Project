@@ -4,7 +4,7 @@ from users.models import User
 
 
 class Country(models.Model):
-    name = models.CharField(max_length=50)
+    name = models.CharField(max_length=50, unique=True)
     population = models.IntegerField()
     percent_indigenous = models.FloatField()
     percent_gdp_on_ed = models.FloatField()
@@ -17,14 +17,14 @@ class Country(models.Model):
         return self.name
 
 class City(models.Model):
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=100, unique=True)
     country = models.ForeignKey(Country, on_delete=models.PROTECT)
 
     def __str__(self):
         return self.name
 
 class Institution(models.Model):
-    name = models.CharField(max_length=150)
+    name = models.CharField(max_length=150, unique=True)
     city = models.ForeignKey(City, on_delete=models.PROTECT)
     met = models.BooleanField(default=False)
     moc = models.BooleanField(default=False)
