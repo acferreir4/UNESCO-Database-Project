@@ -1,3 +1,6 @@
+# can run this in django shell with following command:
+# exec(open('scripts/populateDb.py').read())
+
 import json
 from institutions.models import Country, City, Institution 
 from users.models import User
