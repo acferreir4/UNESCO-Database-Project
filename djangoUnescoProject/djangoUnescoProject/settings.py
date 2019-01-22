@@ -32,8 +32,11 @@ ALLOWED_HOSTS = []
 
 # Add new apps here
 INSTALLED_APPS = [
+    'chat',
+    'channels',
     'blog.apps.BlogConfig', 
     'users.apps.UsersConfig', 
+    'institutions.apps.InstitutionsConfig', 
     'crispy_forms',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -72,6 +75,20 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'djangoUnescoProject.wsgi.application'
+# Channels
+ASGI_APPLICATION = 'djangoUnescoProject.routing.application'
+
+
+# Channels
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            "hosts": [('127.0.0.1', 6379)],
+        },
+    },
+}
+
 
 
 # Database
@@ -81,6 +98,9 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'TEST': {
+            'NAME': os.path.join(BASE_DIR, 'db_test.sqlite3')
+        }
     }
 }
 
@@ -122,6 +142,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'chat/static')
+]
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
@@ -138,3 +161,5 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = os.environ.get('EMAIL_USER')
 EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_PASS')
+
+AUTH_USER_MODEL = 'users.User'
