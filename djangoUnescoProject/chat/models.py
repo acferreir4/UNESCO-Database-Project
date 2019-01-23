@@ -17,4 +17,7 @@ class Message(models.Model):
         return Message.objects.order_by('timestamp').all()
         # load all messages
         # return Message.objects.order_by('timestamp').all()
+        # example for filtering
+        # msg = Message.objects.filter(content='ok')
+        # return msg.order_by('timestamp').all()
         

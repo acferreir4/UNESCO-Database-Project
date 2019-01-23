@@ -21,9 +21,8 @@
     <div id="sidepanel">
       <div id="profile">
         <div class="wrap">
-          <img id="profile-img" src="http://emilcarlsson.se/assets/mikeross.png" class="online" alt="" />
+          <img id="profile-img" src="{{ user.profile.image.url }}" class="online" alt="" />
           <p>{{ user.first_name }} {{ user.last_name }} </p>
-          <i class="fa fa-chevron-down expand-button" aria-hidden="true"></i>
         </div>
       </div>
       <div id="contacts">
@@ -56,7 +55,7 @@
         <img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="" />
         <p>{{ user.get_username }}</p>
       </div>
-      <div class="messages">
+      <div class="messages" id="scrollDownHelper">
         <ul id="chat-log">
           <!-- <li class="sent">
             <img src="http://emilcarlsson.se/assets/mikeross.png" alt="" />
@@ -142,7 +141,13 @@
 
       pTag.appendChild(brTag);
       pTag.appendChild(timeTag);
-      imgTag.src = 'http://emilcarlsson.se/assets/mikeross.png';
+
+      if (author === username) {
+        imgTag.src = '{{ user.profile.image.url }}';
+      } else {
+        imgTag.src = 'http://emilcarlsson.se/assets/mikeross.png';
+      }
+
       
       if (author === username) {
         msgListTag.className = 'sent';
@@ -152,6 +157,11 @@
       msgListTag.appendChild(imgTag);
       msgListTag.appendChild(pTag);
       document.querySelector('#chat-log').appendChild(msgListTag);
+
+      var height = document.getElementById('scrollDownHelper').scrollHeight; - $('#scrollDownHelper').height(); 
+      $('#scrollDownHelper').scrollTop(height);
+
+
     }
 </script>
 </body>
