@@ -1,7 +1,5 @@
 from setuptools import setup, find_packages
 
-import komidl.constants as constants
-
 setup(
     # Application name:
     name="UNESCO DB",
