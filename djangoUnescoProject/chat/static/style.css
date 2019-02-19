@@ -13,6 +13,21 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+.contact-profile-name{
+  color:blue;
+}
+
+
+a {
+  text-decoration: none;
+  color: white;
+}
+
+a:hover {
+  text-decoration: none;
+  color: #F08080;
+}
+
 #frame {
   width: 100%;
   min-width: 360px;

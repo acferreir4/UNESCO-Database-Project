@@ -21,39 +21,40 @@
     <div id="sidepanel">
       <div id="profile">
         <div class="wrap">
-          <img id="profile-img" src="{{ user.profile.image.url }}" class="online" alt="" />
-          <p>{{ user.first_name }} {{ user.last_name }} </p>
+          <img id="profile-img" src="\static\media\me.png" class="online" alt="" />
+          <p style="color: white; font-size: 30px;
+        font-family: Helvetica, sans-serif; font-weight: bold; text-align: center;">{{ user.first_name }} {{ user.last_name }} </p>
         </div>
       </div>
       <div id="contacts">
         <ul>
-          <li class="contact">
-            <div class="wrap">
-              <span class="contact-status online"></span>
-              <img src="http://emilcarlsson.se/assets/louislitt.png" alt="" />
-              <div class="meta">
-                <p class="name">Louis Litt</p>
-                <p class="preview">You just got LITT up, Mike.</p>
-              </div>
-            </div>
-          </li>
-          <li class="contact active">
-            <div class="wrap">
-              <span class="contact-status busy"></span>
-              <img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="" />
-              <div class="meta">
-                <p class="name">Harvey Specter</p>
-                <p class="preview">Wrong. You take the gun, or you pull out a bigger one. Or, you call their bluff. Or, you do any one of a hundred and forty six other things.</p>
-              </div>
-            </div>
-          </li>
+          {% block content %}
+          {% for ra in roomAccess %}
+          {% if ra.user == user %}
+            <li class="contact">
+              <a href="/chat/{{ ra.roomName.name }}">
+                <div class="wrap">
+                  {% if ra.roomName.category == "P" %} 
+                    <img src="\static\media\user.png" alt="User" />
+                  {% else %}
+                    <img src="\static\media\group.png" alt="Group" />
+                  {% endif %}
+                  <div class="meta">
+                    <p style="font-size: 20px; font-size:font-family: Helvetica, sans-serif; font-weight: bold;" >{{ ra.roomName.name }}</p>
+                  </div>
+                </div>
+              </a>
+            </li>
+          {% endif %} 
+          {% endfor %}    
+          {% endblock content %}  
         </ul>
       </div>
     </div>
     <div class="content">
-      <div class="contact-profile">
-        <img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="" />
-        <p>{{ user.get_username }}</p>
+      <div class="contact-profile"> 
+        <p style="color: #2c3e50; font-size: 30px; margin: 9px 0px 0px 25px;
+        font-family: Helvetica, sans-serif; font-weight: bold; text-align: center;">{{ room_name_json|slice:"1:-1" }}</p>
       </div>
       <div class="messages" id="scrollDownHelper">
         <ul id="chat-log">
@@ -113,21 +114,27 @@
         chatSocket.send(JSON.stringify({
             'command': 'new_message',
             'message': message,
-            'from': username
+            'from': username,
+            'in_room': roomName
         }));
         messageInputDom.value = '';
     };
     function fetchMessages() {
-      chatSocket.send(JSON.stringify({'command': 'fetch_messages' }));
+      chatSocket.send(JSON.stringify({'command': 'fetch_messages', 'RName': roomName }));
     }
     function createMessage(data) {
       var author = data['author'];
       var msgListTag = document.createElement('li');
       var imgTag = document.createElement('img');
       var pTag = document.createElement('p');
+      var pcTag = document.createElement('h5');
       var brTag = document.createElement('br');
       var timeTag = document.createElement('h6');
-      pTag.textContent = data.content;
+      pTag.textContent = author;
+      pTag.style='font-weight: bold';
+      pTag.appendChild(brTag);
+      pcTag.textContent = data.content;
+      pTag.appendChild(pcTag);
       var tmpTime = Math.round((new Date().getTime() - new Date(data.timestamp).getTime())/60000);
       if (tmpTime < 60) {
         timeTag.textContent = `${tmpTime} minutes ago`;
@@ -138,14 +145,12 @@
         tmpTime = Math.round(tmpTime/1440);
         timeTag.textContent = `${tmpTime} days ago`;
       }
-
-      pTag.appendChild(brTag);
       pTag.appendChild(timeTag);
 
       if (author === username) {
-        imgTag.src = '{{ user.profile.image.url }}';
+        imgTag.src = '/static/media/me.png';
       } else {
-        imgTag.src = 'http://emilcarlsson.se/assets/mikeross.png';
+        imgTag.src = '/static/media/user.png';
       }
 
       
