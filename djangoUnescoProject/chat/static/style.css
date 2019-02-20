@@ -28,6 +28,23 @@ a:hover {
   color: #F08080;
 }
 
+#home-back-btn{
+  background: #f5f5f5; 
+  border-radius: 12px;
+  width: 80%;
+  margin: 25px auto;
+}
+
+#home-back-btn:hover {
+  background: #F08080;
+}
+#home-back-btn a {
+  color: #2c3e50;
+}
+#home-back-btn a:hover {
+  color: #FFFFFF;
+}
+
 #frame {
   width: 100%;
   min-width: 360px;
