@@ -19,34 +19,61 @@
 <body>
   <div id="frame">
     <div id="sidepanel">
+      <div id="home-back-btn">
+          <a href="/">
+            <!-- <img id="profile-img" src="\static\media\home.png" class="online" alt="" /> -->
+            <p style="font-size: 20px; text-transform: uppercase;
+              font-family: Helvetica, sans-serif; font-weight: bold; text-align: center;">Go Back</p>
+          </a>
+      </div>
       <div id="profile">
         <div class="wrap">
           <img id="profile-img" src="\static\media\me.png" class="online" alt="" />
-          <p style="color: white; font-size: 30px;
-        font-family: Helvetica, sans-serif; font-weight: bold; text-align: center;">{{ user.first_name }} {{ user.last_name }} </p>
+          <p style="color: white; font-size: 15px; text-transform: uppercase;
+        font-family: Helvetica, sans-serif; font-weight: bold; text-align: center;">{{ user.username }} </p>
+
         </div>
       </div>
       <div id="contacts">
         <ul>
           {% block content %}
-          {% for ra in roomAccess %}
-          {% if ra.user == user %}
-            <li class="contact">
-              <a href="/chat/{{ ra.roomName.name }}">
-                <div class="wrap">
-                  {% if ra.roomName.category == "P" %} 
-                    <img src="\static\media\user.png" alt="User" />
-                  {% else %}
-                    <img src="\static\media\group.png" alt="Group" />
-                  {% endif %}
-                  <div class="meta">
-                    <p style="font-size: 20px; font-size:font-family: Helvetica, sans-serif; font-weight: bold;" >{{ ra.roomName.name }}</p>
-                  </div>
-                </div>
-              </a>
-            </li>
-          {% endif %} 
-          {% endfor %}    
+            {% if user.is_staff %}
+              {% for cr in chatRooms %}
+                <li class="contact">
+                  <a href="/chat/{{ cr.name }}">
+                    <div class="wrap">
+                      {% if cr.category == "P" %} 
+                        <img src="\static\media\user.png" alt="User" />
+                      {% else %}
+                        <img src="\static\media\group.png" alt="Group" />
+                      {% endif %}
+                      <div class="meta">
+                        <p style="font-size: 20px; font-size:font-family: Helvetica, sans-serif; font-weight: bold;" >{{ cr.name }}</p>
+                      </div>
+                    </div>
+                  </a>
+                </li>
+              {% endfor %}
+            {% else %}
+              {% for ra in roomAccess %}
+              {% if ra.user == user %}
+                <li class="contact">
+                  <a href="/chat/{{ ra.roomName.name }}">
+                    <div class="wrap">
+                      {% if ra.roomName.category == "P" %} 
+                        <img src="\static\media\user.png" alt="User" />
+                      {% else %}
+                        <img src="\static\media\group.png" alt="Group" />
+                      {% endif %}
+                      <div class="meta">
+                        <p style="font-size: 20px; font-size:font-family: Helvetica, sans-serif; font-weight: bold;" >{{ ra.roomName.name }}</p>
+                      </div>
+                    </div>
+                  </a>
+                </li>
+              {% endif %} 
+              {% endfor %}
+            {% endif %}    
           {% endblock content %}  
         </ul>
       </div>
@@ -124,13 +151,14 @@
     }
     function createMessage(data) {
       var author = data['author'];
+      var fullName = data['fullName'];
       var msgListTag = document.createElement('li');
       var imgTag = document.createElement('img');
       var pTag = document.createElement('p');
       var pcTag = document.createElement('h5');
       var brTag = document.createElement('br');
       var timeTag = document.createElement('h6');
-      pTag.textContent = author;
+      pTag.textContent = fullName;
       pTag.style='font-weight: bold';
       pTag.appendChild(brTag);
       pcTag.textContent = data.content;

@@ -7,6 +7,8 @@ from django.db import models
 class ChatRooms(models.Model):
     name = models.CharField(max_length=50)
     category = models.CharField(max_length=1)
+    display_line_1 = models.CharField(max_length=50, null=True)
+    display_line_2 = models.CharField(max_length=50, null=True)
 
     def __str__(self):
         return self.name
