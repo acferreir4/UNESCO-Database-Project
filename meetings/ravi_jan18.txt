@@ -1,0 +1,48 @@
+ENG 4000 Meeting Notes
+January 18, 2019
+Ravi Meeting
+----------------
+
+
+Think of user as non technical dude
+    consider the autosave feature in forms with "Save as Draft"
+    consider possibility that user might lose information and not be aware that they need to save as draft
+
+If its not specified its vague in Waterfall
+
+    clarify with client when missing requirements/incomplete
+    negotiations with requirements
+    Change requests in waterfall
+
+    We can be agile in the sense that we communicate with the client 
+
+    Agile talk:
+        Minimal Viable Product: what is the minimum product that gives our user a usable product.
+        Need MVP by certain time or budget?
+
+        Where do you draw the line for requirements?
+            Within budget and time constraints
+
+
+    Define high-level requirements
+        Dissect them by looking at lower-level requirements that compose the high-level requirement.
+        Use this
+
+        Must have, should have, could have and would have
+
+    No Gold-Plating (given that we're crunched for time): adding features
+
+
+    Before going live:
+    After going live:
+
+    Change Review Boards approve changes once system deployed
+
+    GreenField : starting from scratch
+    BrownField : inheriting old system
+
+Testing Procedure:
+    - every functional requirement has corresponding test cases to verify that the requirement is satisfied by the dev work.
+    
+    
+Write unit tests for tests that can be automated.
