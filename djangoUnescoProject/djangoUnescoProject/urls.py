@@ -19,7 +19,7 @@ from django.urls import path, include
 from users import views as user_views
 from django.conf import settings
 from django.conf.urls.static import static
-
+from dynamicforms import views as dynamicforms_views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('blog.urls')),
@@ -40,6 +40,7 @@ urlpatterns = [
         auth_views.PasswordResetCompleteView.as_view(template_name='users/password_reset_complete.html'), 
         name='password_reset_complete'),
     path('chat/', include('chat.urls', namespace='chat')),
+    path('create-form', dynamicforms_views.create_form, name="create-form"),
 
 ]
 
