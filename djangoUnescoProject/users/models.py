@@ -1,6 +1,11 @@
 from django.db import models
-from django.contrib.auth.models import User
+from django.contrib.auth.models import AbstractUser
+#from institutions.models import Institution
 from PIL import Image
+
+class User(AbstractUser):
+    role = models.CharField(max_length=150, default='Researcher', blank=True, null=True)
+    institution = models.ForeignKey('institutions.Institution', on_delete=models.PROTECT)
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -9,8 +14,8 @@ class Profile(models.Model):
     def __str__(self):
         return f'{self.user.username} Profile'
 
-    def save(self):
-        super().save()
+    def save(self, *args, **kwargs):
+        super(Profile, self).save(*args, **kwargs)
 
         img = Image.open(self.image.path)
 

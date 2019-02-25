@@ -39,6 +39,8 @@ urlpatterns = [
     path('password-reset-complete/', 
         auth_views.PasswordResetCompleteView.as_view(template_name='users/password_reset_complete.html'), 
         name='password_reset_complete'),
+    path('chat/', include('chat.urls', namespace='chat')),
+
 ]
 
 if settings.DEBUG:
