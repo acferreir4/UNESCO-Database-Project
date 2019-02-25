@@ -20,3 +20,5 @@ class InstitutionCreateForm(forms.ModelForm):
                 'student_count', 
                 'staff_count'
                 ]
+
+

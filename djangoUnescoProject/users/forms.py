@@ -10,7 +10,7 @@ class UserRegisterForm(UserCreationForm):
     #(i.e. form.save() saves new field email into User model)
     class Meta:
         model = User
-        fields = ['username', 'email', 'role', 'institution', 'password1', 'password2']
+        fields = ['username', 'first_name', 'last_name', 'email', 'is_staff', 'role', 'institution', 'password1', 'password2']
 
 class UserUpdateForm(forms.ModelForm):
     email = forms.EmailField()

@@ -1,12 +1,14 @@
 {% extends "blog/base.html" %}
 {% block content %}
     <div class="content-section">
-        <div class="media">
-            <img class="rounded-circle account-img" src="{{user.profile.image.url}}">
-            <div class="media-body">
-                <h2 class="account-heading">{{user.username}}</h2>
-                <p class="text-secondary">{{user.email}}</p>
-            </div>
+        <legend class="border-bottom mb-4">Manage Institutions</legend>
+        <p>Select an Institution to update.</p>
+        <div>
+            <a class="btn btn-primary btn-sm mt-1 mb-1" href="{% url 'institution-create' %}">+ Add Institution</a>
+            <a class="btn btn-primary btn-sm mt-1 mb-1" href="#">Export (.csv)</a>
         </div>
+    {% for inst in institutions %}
+        <a class="list-group-item" href="{% url 'institution-update' inst.id %}">{{inst.name}}</a>
+    {% endfor %}
     </div>
 {% endblock content %}
