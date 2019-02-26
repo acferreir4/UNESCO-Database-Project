@@ -26,7 +26,8 @@ with open('scripts/cities.json') as f_cities:
 
 for city in cities_json:
     city = City(
-            name=city['name'], country_id=city['country_id']
+            name=city['name'], 
+            country_id=city['country_id']
             )
     city.save()
 
@@ -53,13 +54,13 @@ for inst in institutions_json:
 
 user = User(
         username='admin', 
-        first_name='ad', 
-        last_name='min',
+        first_name='Andrew', 
+        last_name='Ferreira',
         email='admin@admin.com',
         is_staff=True,
         is_active=True,
         is_superuser=True,
-        role='admin',
+        role='Administrator',
         institution_id = 1
         )
 user.set_password('testing321')
