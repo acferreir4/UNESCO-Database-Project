@@ -5,7 +5,7 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 
 
 class Country(models.Model):
-    name = models.CharField(max_length=50, unique=True)
+    name = models.CharField(max_length=50)
     population = models.IntegerField()
     percent_indigenous = models.FloatField(
             validators=[MinValueValidator(0), MaxValueValidator(100)]
@@ -26,7 +26,7 @@ class Country(models.Model):
 
 
 class City(models.Model):
-    name = models.CharField(max_length=100, unique=True)
+    name = models.CharField(max_length=100)
     country = models.ForeignKey(Country, on_delete=models.PROTECT)
 
     class Meta:
@@ -37,7 +37,7 @@ class City(models.Model):
 
 
 class Institution(models.Model):
-    name = models.CharField(max_length=150, unique=True)
+    name = models.CharField(max_length=150)
     city = models.ForeignKey(City, on_delete=models.PROTECT)
     met = models.BooleanField(default=False)
     moc = models.BooleanField(default=False)
