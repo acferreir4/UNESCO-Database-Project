@@ -15,7 +15,8 @@ class DynamicFormModel(models.Model):
         super().save(*args, **kwargs)
         
         for idx, question in enumerate(kwargs['questions']):
-            self.fields['Question {0}.'.format(idx + 1)] = models.TextField(help_text=question) '''
+            self.fields['Question {0}.'.format(idx + 1)] = models.TextField(help_text=question) 
+'''
 
 class DataTable(models.Model):
     form_id = models.ForeignKey('Forms', on_delete=models.PROTECT)
@@ -36,6 +37,12 @@ class Forms(models.Model):
     creation_time = models.DateTimeField(default=date.today)
     expiry_date = models.DateTimeField(default=date.today)
 
+    class Meta:
+        verbose_name_plural = "Forms"
+
+    def __str__(self):
+        return self.name
+
 class Questions(models.Model):
     form_id = models.ForeignKey('Forms', on_delete=models.PROTECT)
     question_text = models.CharField(max_length=100000)
@@ -43,3 +50,5 @@ class Questions(models.Model):
     is_active = models.BooleanField(default=True)
     last_modification_time = models.DateTimeField(default=date.today)
 
+    class Meta:
+        verbose_name_plural = "Questions"

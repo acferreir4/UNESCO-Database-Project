@@ -17,10 +17,10 @@ def create_form(request):
     form = DynamicQuestionForm(request.POST if request.method == 'POST' else None, question_nums=question_nums)
     if form.is_valid():
         title = form.cleaned_data.get('title')
-        messages.success(request, f'The form {title} has been created, bitch!')
+        messages.success(request, f'The form {title} has been created, woohoo!')
         for key in form.cleaned_data.keys():
             if key != 'title':
-                messages.success(request, f'The question {form.cleaned_data.get(key)} has been made, bitch!')
+                messages.success(request, f'The question {form.cleaned_data.get(key)} has been made, woohoo!')
         messages.success(request, f'The number of questions is: {question_nums}')
 
         '''Creating some forms:'''
@@ -34,8 +34,7 @@ def create_form(request):
                     question_text = form.cleaned_data.get(key)
 
                 )
-        
-        
         return redirect('register')
+
     return render (request, 'dynamicforms/create.html', {'form': form, 'numQuestions': question_nums})
     

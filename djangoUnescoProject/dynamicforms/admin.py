@@ -1,3 +1,5 @@
 from django.contrib import admin
+from .models import Forms, Questions
 
-# Register your models here.
+admin.site.register(Forms)
+admin.site.register(Questions)
