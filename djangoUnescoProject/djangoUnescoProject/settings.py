@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'blog.apps.BlogConfig', 
     'users.apps.UsersConfig', 
     'institutions.apps.InstitutionsConfig', 
+    'dynamicforms.apps.DynamicformsConfig',
     'crispy_forms',
 ]
 
