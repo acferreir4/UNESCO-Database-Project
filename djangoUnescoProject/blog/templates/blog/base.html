@@ -13,9 +13,9 @@
         <link rel="stylesheet" type="text/css" href="{% static 'blog/main.css' %}">
 
         {% if title %}
-            <title>Django Blog - {{ title }}</title>
+            <title>UNESCO Education - {{ title }}</title>
         {% else %}
-            <title>Django Blog</title>
+            <title>UNESCO Education</title>
         {% endif %}
     </head>
     <body>
@@ -23,7 +23,7 @@
         <header class="site-header">
           <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
             <div class="container">
-              <a class="navbar-brand mr-4" href="{% url 'blog-home' %}">Django Blog</a>
+              <a class="navbar-brand mr-4" href="{% url 'blog-home' %}">UNESCO</a>
               <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
               </button>
@@ -35,12 +35,12 @@
                 <!-- Navbar Right Side -->
                 <div class="navbar-nav">
                     {% if user.is_authenticated %}
-                        <a class="nav-item nav-link" href="{% url 'post-create' %}">New Post</a>
-                        <a class="nav-item nav-link" href="{% url 'profile' %}">Profile</a>
+                        <a class="nav-item nav-link" href="{% url 'chat:index' %}">Chat</a>
+                        <a class="nav-item nav-link" href="{% url 'institution-detail' user.institution.id %}">My Institution</a>
+                        <a class="nav-item nav-link" href="{% url 'profile' %}">My Profile</a>
                         <a class="nav-item nav-link" href="{% url 'logout' %}">Logout</a>
                     {% else %}
                         <a class="nav-item nav-link" href="{% url 'login' %}">Login</a>
-                        <a class="nav-item nav-link" href="{% url 'register' %}">Register</a>
                     {% endif %}
                 </div>
               </div>
@@ -60,6 +60,35 @@
                 {% endif %}
                 {% block content %}{% endblock %}
             </div>
+            {% if user.is_authenticated and user.is_staff %}
+            <div class="col-md-4">
+              <div class="content-section">
+                <h3>Admin Functions</h3>
+                <p class='text-muted'>
+                  <ul class="list-group">
+                      <a class="list-group-item" href="{% url 'register' %}">
+                          Register New User
+                      </a>
+                      <a class="list-group-item" href="{% url 'post-create' %}">
+                          Create Announcement
+                      </a>
+                      <a class="list-group-item" href="{% url 'create-form' %}">
+                          Create Custom Form
+                      </a>
+                      <a class="list-group-item" href="{% url 'admin:index' %}">
+                          Manage Data
+                      </a>
+                      <a class="list-group-item" href="{% url 'export-user' %}">
+                          Export User Data (.csv)
+                      </a>
+                      <a class="list-group-item" href="{% url 'export-inst' %}">
+                          Export Institution Data (.csv)
+                      </a>
+                  </ul>
+                </p>
+              </div>
+            </div>
+            {% else %}
             <div class="col-md-4">
               <div class="content-section">
                 <h3>Our Sidebar</h3>
@@ -73,6 +102,7 @@
                 </p>
               </div>
             </div>
+            {% endif %}
           </div>
         </main>
 

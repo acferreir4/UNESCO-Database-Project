@@ -27,3 +27,10 @@
 *.synctex.gz
 *.synctex.gz(busy)
 *.pdfsync
+
+## Django
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+
+db.sqlite3

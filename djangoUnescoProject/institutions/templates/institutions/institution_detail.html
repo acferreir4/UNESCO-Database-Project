@@ -1,0 +1,27 @@
+{% extends "blog/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <div class="content-section">
+        <legend class="border-bottom mb-4">{{ object.name }}</legend>
+        <div>
+            <h5>Location</h5>
+            <p>{{ object.city }}, {{ object.city.country }}</p>
+        </div>
+        <div>
+            <h5>Role</h5>
+            <p>{{ object.role }}</p>
+        </div>
+        <div>
+            <h5>Type of Institution</h5>
+            <p>{{ object.type_of_inst }}</p>
+        </div>
+        <div>
+            <h5>Number of Students</h5>
+            <p>{{ object.student_count }}</p>
+        </div>
+        <div>
+            <h5>Number of Staff</h5>
+            <p>{{ object.staff_count }}</p>
+        </div>
+    </div>
+{% endblock content %}

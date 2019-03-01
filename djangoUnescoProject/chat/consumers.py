@@ -4,6 +4,7 @@ from asgiref.sync import async_to_sync
 from channels.generic.websocket import WebsocketConsumer
 import json
 from .models import Message, ChatRooms
+
 class ChatConsumer(WebsocketConsumer):
 
     def fetch_messages(self, data):

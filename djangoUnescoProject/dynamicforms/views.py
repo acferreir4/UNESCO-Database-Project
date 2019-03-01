@@ -50,5 +50,6 @@ def create_form(request):
         '''
         
         return redirect('register')
+
     return render (request, 'dynamicforms/create.html', {'form': form, 'numQuestions': question_nums})
     
