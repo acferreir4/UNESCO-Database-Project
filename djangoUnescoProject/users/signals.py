@@ -12,7 +12,7 @@ def create_profile(sender, instance, created, **kwargs):
         	category='P', display_line_1=instance.get_full_name(), 
         	display_line_2=instance.institution)
         RoomAccess.objects.create(user=instance,roomName=room)
-        main_room = ChatRooms.objects.filter(name='Main_Rooom').first()
+        main_room = ChatRooms.objects.filter(name='Main_Room').first()
         RoomAccess.objects.create(user=instance,roomName=main_room)
 @receiver(post_save, sender=User)
 def save_profile(sender, instance, **kwargs):
