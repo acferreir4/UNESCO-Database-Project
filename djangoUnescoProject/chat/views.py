@@ -6,30 +6,32 @@ from django.utils.safestring import mark_safe
 from .models import ChatRooms, RoomAccess
 from .models import Message
 import json
+import logging
 
 def index(request):
     return render(request, 'chat/index.html', {})
 
 @login_required
 def room(request, room_name):
+    
+    logger = logging.getLogger(__name__);
+    valid = False;
+    for valid_rooms in RoomAccess.objects.filter(user=request.user):
+        # logger.warning(valid_rooms.roomName.name);
+        if valid_rooms.roomName.name == room_name:
+             valid = True;
+    if request.user.is_staff:
+        valid = True;
 
-	valid = False;
-	for valid_rooms in RoomAccess.objects.filter(user=request.user):
-		if valid_rooms.roomName.name == room_name:
-			valid = True;
-
-	if request.user.is_staff:
-		valid = True;
-
-	if valid:
-		return render(request, 'chat/room.html', {
+    if valid:
+        return render(request, 'chat/room.html', {
 	        'room_name_json': mark_safe(json.dumps(room_name)),
 	        'username': mark_safe(json.dumps(request.user.username)),
 	        'chatRooms': ChatRooms.objects.order_by('category').all(),
 	        'roomAccess': RoomAccess.objects.all(),
 	    })
-	else:
-		return render(request, 'chat/accessDenied.html')
+    else:
+        return render(request, 'chat/accessDenied.html')
 # def list(request):
 #     context = {
 #         'chatRooms': ChatRooms.objects.all()
