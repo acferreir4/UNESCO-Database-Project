@@ -14,6 +14,7 @@
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
     <link rel="stylesheet" href="{% static 'style.css' %}" />
+    <title>Chat</title>
   </head>
 
 <body>
@@ -44,12 +45,18 @@
                     <div class="wrap">
                       {% if cr.category == "P" %} 
                         <img src="\static\media\user.png" alt="User" />
+                        <div class="meta">
+                          <p class="name" >{{ cr.display_line_1 }}</p>
+                          <p class="preview">{{ cr.display_line_2 }}</p>
+                        </div>
                       {% else %}
                         <img src="\static\media\group.png" alt="Group" />
+                        <div class="meta">
+                          <p class="name" >{{ cr.name }}</p>
+                          <p class="preview">{{ cr.display_line_1 }}</p>
+                          <p class="preview">{{ cr.display_line_2 }}</p>
+                        </div>
                       {% endif %}
-                      <div class="meta">
-                        <p style="font-size: 20px; font-size:font-family: Helvetica, sans-serif; font-weight: bold;" >{{ cr.name }}</p>
-                      </div>
                     </div>
                   </a>
                 </li>
@@ -62,12 +69,19 @@
                     <div class="wrap">
                       {% if ra.roomName.category == "P" %} 
                         <img src="\static\media\user.png" alt="User" />
+                        <div class="meta">
+                          <p class="name">Admins</p>
+                          <p class="preview">All admins are in this</p>
+                          <p class="preview">common chat room</p>
+                        </div>
                       {% else %}
                         <img src="\static\media\group.png" alt="Group" />
+                        <div class="meta">
+                          <p class="name" >{{ ra.roomName.name }}</p>
+                          <p class="preview">{{ ra.roomName.display_line_1 }}</p>
+                          <p class="preview">{{ ra.roomName.display_line_2 }}</p>
+                        </div>
                       {% endif %}
-                      <div class="meta">
-                        <p style="font-size: 20px; font-size:font-family: Helvetica, sans-serif; font-weight: bold;" >{{ ra.roomName.name }}</p>
-                      </div>
                     </div>
                   </a>
                 </li>
@@ -82,6 +96,12 @@
       <div class="contact-profile"> 
         <p style="color: #2c3e50; font-size: 30px; margin: 9px 0px 0px 25px;
         font-family: Helvetica, sans-serif; font-weight: bold; text-align: center;">{{ room_name_json|slice:"1:-1" }}</p>
+        
+        {% if user.is_staff %}
+          <div class="social-media">
+            <i class="fa" aria-hidden="true"><a style="background: #2c3e50; font-size: 20px; color: #ffffff; border-radius: 15px; text-transform: uppercase; font-family: Helvetica, sans-serif; font-weight: bold; text-align: center;" class="list-group-item" href="download/">Download Chat</a></i>
+          </div>
+        {% endif %}
       </div>
       <div class="messages" id="scrollDownHelper">
         <ul id="chat-log">

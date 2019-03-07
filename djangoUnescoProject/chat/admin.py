@@ -9,6 +9,7 @@ from .models import Message, RoomAccess, ChatRooms
 
 class ChatRoomsAdmin(admin.ModelAdmin):
     list_display = ('name', 'category', 'display_line_1', 'display_line_2')
+    ordering = ('category','name')
 admin.site.register(ChatRooms, ChatRoomsAdmin)
 
 class RoomAccessAdmin(admin.ModelAdmin):

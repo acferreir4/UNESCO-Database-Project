@@ -4,6 +4,7 @@
 import json
 from institutions.models import Country, City, Institution 
 from users.models import User
+from chat.models import ChatRooms
 
 with open('scripts/countries.json') as f_countries:
     countries_json = json.load(f_countries)
@@ -52,6 +53,14 @@ for inst in institutions_json:
             )
     inst.save()
 
+MainRoom = ChatRooms(
+        name='Main_Room',
+    	category='G',
+    	display_line_1='Discussion Board',
+    	display_line_2='For All Members'
+        )
+MainRoom.save()
+
 user = User(
         username='admin', 
         first_name='Andrew', 
@@ -65,3 +74,4 @@ user = User(
         )
 user.set_password('testing321')
 user.save()
+
