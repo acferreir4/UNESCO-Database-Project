@@ -1,29 +1,46 @@
 from django import forms
-from .validators import validator
+from .validator import validate_field, validate_title
 
 class DynamicQuestionForm(forms.Form):
 
     def __init__(self, *args, **kwargs):
+        # The total number of questions in the form
         self.question_nums = kwargs.pop('question_nums')
+        # Primary key of the form if creating the form from an existing model
+        self.form_pk = None 
+        if 'form_pk' in kwargs:
+            self.form_pk = kwargs.pop('form_pk')
+        # The actual questions of the form, created by an admin user
         self.form_questions = kwargs.pop('form_questions')
+        # Check to validate the form input if saving the form
         self.save = kwargs.pop('save')
+        self.title = kwargs.pop('title')
+        # Variable used to check if the created form is meant for creating questions or answering them
+        self.is_answer = kwargs.pop('is_answer')
+        # Variable used to display the actual questions where answering a form
+        self.question_labels = None
+        if 'question_labels' in kwargs:
+            self.question_labels = kwargs.pop('question_labels')
+        
         super().__init__(*args, **kwargs)
-        self.fields['title'] = forms.CharField(max_length=300, required=False, initial=self.form_questions['title'] if self.form_questions else '')
+        self.fields['title'] = forms.CharField(max_length=300, required=False, initial=self.title if self.title else '', disabled=self.is_answer)
         
         # Put an error message for the title field if it is empty when trying to save the form
         if self.save:
-            error_msg = validator.validate_field(self.form_questions['title'])
-            if len(error_msg) > 0:
-                self.errors['title'] = [error_msg]
+            self.__validate_title_field()
 
         for i in range(self.question_nums):
-            default_value = self.form_questions['Question {0}'.format(i + 1)] if self.form_questions and 'Question {0}'.format(i + 1) in self.form_questions else ''
-            self.fields['Question {0}'.format(i + 1)] = forms.CharField(max_length=100000, initial=default_value, required=False)
-            error_msg = validator.validate_field(default_value)
+            default_value = self.form_questions[f'Question {i + 1}'] if self.form_questions and f'Question {i + 1}' in self.form_questions else ''
+            self.fields[f'Question {i + 1}'] = forms.CharField(max_length=100000, initial=default_value, required=False, label=f'Question {i+1}: {self.question_labels[i+1]}' if self.question_labels else None)
+            error_msg = validate_field(default_value)
             
             # Put an error message for all the fields that are not empty when trying to save the form
             if self.save and len(error_msg) > 0:
                 print(error_msg, default_value)
-                if self.form_questions and 'Question {0}'.format(i + 1) in self.form_questions:
-                    self.errors['Question {0}'.format(i + 1)] = [error_msg]
-   
+                if self.form_questions and f'Question {i + 1}' in self.form_questions:
+                    self.errors[f'Question {i + 1}'] = [error_msg]
+
+    def __validate_title_field(self):
+        error_msg = validate_field(self.title) or validate_title(self.title, self.form_pk)
+        if len(error_msg) > 0:
+            self.errors['title'] = [error_msg]

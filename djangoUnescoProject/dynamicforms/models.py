@@ -1,5 +1,4 @@
 from django.db import models
-from django import forms
 from datetime import date
 
 # Create your models here.
@@ -19,8 +18,8 @@ class DynamicFormModel(models.Model):
 '''
 
 class DataTable(models.Model):
-    form_id = models.ForeignKey('Forms', on_delete=models.PROTECT)
-    question_id = models.ForeignKey('Questions', on_delete=models.PROTECT)
+    form_id = models.ForeignKey('DynamicForms', on_delete=models.CASCADE)
+    question_id = models.ForeignKey('Questions', on_delete=models.CASCADE)
     #Change submitter_id back to use foreign key to user
     #submitter_id = models.ForeignKey('users.User', on_delete=models.PROTECT)
     submitter_id = models.CharField(max_length=100, blank=True, null=True)
@@ -28,23 +27,24 @@ class DataTable(models.Model):
     is_active = models.BooleanField(default=True)
 
 
-class Forms(models.Model):
+class DynamicForms(models.Model):
     #Change creator_id back to user foreign key to user
     #creator_id = models.ForeignKey('users.User', on_delete=models.PROTECT)
     creator_id = models.CharField(max_length=100, blank=True, null=True)
-    name = models.CharField("Title", max_length=300, unique=True)
+    title = models.CharField(max_length=300, unique=True)
     is_active = models.BooleanField(default=True)
     creation_time = models.DateTimeField(default=date.today)
     expiry_date = models.DateTimeField(default=date.today)
 
     class Meta:
-        verbose_name_plural = "Forms"
+        verbose_name_plural = "DynamicForms"
 
     def __str__(self):
-        return self.name
+        return self.title
 
 class Questions(models.Model):
-    form_id = models.ForeignKey('Forms', on_delete=models.PROTECT)
+    form_id = models.ForeignKey('DynamicForms', on_delete=models.CASCADE)
+    question_num = models.IntegerField()
     question_text = models.CharField(max_length=100000)
     answer_type = models.CharField(max_length=50, blank=True, null=True)
     is_active = models.BooleanField(default=True)
