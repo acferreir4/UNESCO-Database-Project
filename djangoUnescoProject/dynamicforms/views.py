@@ -7,8 +7,6 @@ from .models import DynamicForms, Questions, DataTable
 # Create your views here.
 
 def start_form(request):
-    for question in Questions.objects.all():
-        print(question.question_text)
     return render (request, 'dynamicforms/home.html', {'forms': DynamicForms.objects.all()})
     
 def create_form(request):
@@ -22,7 +20,6 @@ def create_form(request):
         form_questions = request.POST.dict()
         title = form_questions['title']
         if request.POST.get('save'):        
-        #question_nums = int(request.POST.get('numQuestions')) + 1 if request.POST.get('add') else int(request.POST.get('save'))
             question_nums = int(request.POST.get('save'))
             save = True
         else:
@@ -41,7 +38,6 @@ def create_form(request):
             if key != 'title':
                 messages.success(request, f'The question {form.cleaned_data.get(key)} has been created!')
         messages.success(request, f'The number of questions is: {question_nums}')
-        print(form.cleaned_data.keys())
         new_form = DynamicForms.objects.create(
             title = title,
         )
