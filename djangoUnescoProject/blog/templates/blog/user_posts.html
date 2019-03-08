@@ -11,6 +11,12 @@
             </div>
             <h2><a class="article-title" href="{% url 'post-detail' post.id %}">{{ post.title }}</a></h2>
             <p class="article-content">{{ post.content }}</p>
+            {% if post.fileAttachment %}
+            <a href="{{ post.fileAttachment }}"class="btn btn-primary mb-4"> View File </a>
+            {% endif %}
+            {% if post.imageAttachment %}
+            <a href="{{ post.imageAttachment }}"class="btn btn-primary mb-4"> View Image </a>
+            {% endif %}
           </div>
         </article>
     {% endfor %}

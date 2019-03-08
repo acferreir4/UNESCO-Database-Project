@@ -4,6 +4,7 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 from users.models import User
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from .models import Post
+from django.core.files.storage import FileSystemStorage
 
 # handles traffic from the homepage of our blog
 # request argument must be there
@@ -16,6 +17,8 @@ def home(request):
 
 def about(request):
     return render(request, 'blog/about.html', {'title': 'About'}) 
+
+
 
 class PostListView(ListView):
     model = Post
@@ -41,7 +44,8 @@ class PostDetailView(DetailView):
 
 class PostCreateView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
     model = Post
-    fields = ['title', 'content']
+    fields = ['title', 'content', 'date_expire', 'fileAttachment', 'imageAttachment']
+    success_url = '/'
 
     def form_valid(self, form):
         form.instance.author = self.request.user
@@ -53,7 +57,7 @@ class PostCreateView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
 
 class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Post
-    fields = ['title', 'content']
+    fields = ['title', 'content', 'date_expire', 'fileAttachment', 'imageAttachment']
 
     def form_valid(self, form):
         form.instance.author = self.request.user
