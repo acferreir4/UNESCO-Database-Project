@@ -526,7 +526,7 @@ a:hover {
 }
 #frame .content {
   float: right;
-  width: 60%;
+  width: 80%;
   height: 100%;
   overflow: hidden;
   position: relative;
@@ -596,8 +596,8 @@ a:hover {
   display: inline-block;
   clear: both;
   float: left;
-  margin: 15px 15px 5px 15px;
-  width: calc(100% - 25px);
+  margin: 5px 1px 5px 1px;
+  width: calc(100% - 5px);
   font-size: 0.9em;
 }
 #frame .content .messages ul li:nth-last-child(1) {
@@ -705,3 +705,4 @@ a:hover {
 .fa {
   font-size: 1.5em !important;
 }
+
