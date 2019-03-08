@@ -16,19 +16,62 @@ Give examples
 
 ### Installing
 
-A step by step series of examples that tell you how to get a development env running
+Run the following lines one by one after loging into your new server.
 
-Say what the step will be
-
-```
-Give the example
-```
-
-And repeat
+[Say the server is Ubuntu based distribution with IP - 159.89.124.218]
 
 ```
-until finished
+cd ~
+mkdir app
+cd app
+apt install python
+sudo apt update
+python3 -V
+sudo apt install python3-django
+sudo apt update
+sudo apt install python3-pip
+sudo apt install python3-venv
+python3.6 -m venv my_env
+source my_env/bin/activate
+pip install django
+pip install -U channels
+pip install --upgrade django-crispy-forms
+pip install image
+sudo apt update
+sudo apt install redis-server
+//  ps aux | grep redis <<Check running redis servers>>
+//  /etc/init.d/redis-server restart
+//  /etc/init.d/redis-server stop
+//  /etc/init.d/redis-server start
+pip install asgi_redis
+pip install asgiref==2.2.0
+pip install channels_redis
+/etc/init.d/redis-server start <<if not started>>
+git clone https://github.com/acferreir4/UNESCO-Database-Project.git
+cd UNESCO-Database-Project/djangoUnescoProject/
+python manage.py runserver 159.89.124.218:8000
 ```
+
+NOTE: in the settings.py we have to add our droplet hostip, like below
+ALLOWED_HOSTS = ['159.89.124.218']
+
+## Optonal Tasks
+
+keep it the site live: Keep the app running after you exit the console by using screen to keep the app running on the background.
+
+```
+make new screen session
+1. screen
+2. python manage.py runserver 159.89.124.218:8000
+3. CLT+A then d
+
+<<resume cmd>>  screen -r
+		  	        screen -r 22082.pts-0.UNESCO-Project <<to kill specific screen>>
+<<kill cmd>>    screen -r 22056.pts-0.UNESCO-Project kill
+```
+## Keep it synced with github
+How To Use Git Hooks To Automate Development and Deployment Tasks: https://www.digitalocean.com/community/tutorials/how-to-use-git-hooks-to-automate-development-and-deployment-tasks
+
 
 End with an example of getting some data out of the system or using it for a little demo
 

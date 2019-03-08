@@ -1,4 +1,53 @@
-Institution Profile pages:
-    Do you want users to have access to each Institution's profile? or do they view only their own Institution's profile?
+User Registration:
+- How to handle password setting?
+- Can users reset their own passwords if they forget?
+- Automatic emails to users once you register them?
+    - Default password, send email, user changes
 
-Does each institution get its own separate form? 
+
+User Login:
+- Remember Me for login.
+
+
+User Profile:
+- What fields can users modify on their own?
+    -- Contact information: email, cellphone and Facebook
+Include last login as metric
+
+
+User and Institution Data Export:
+- Add acronym field for Institutions, managed by Admin
+- Does it have the right information?
+- Significance of fields like MoC, Met, etc.
+    -- Katrin to send me small description of each field for exporting.
+
+Chat:
+- Main group where all users live.
+- Have option to link to and discuss announcements.
+
+
+
+Home Page:
+- Have a list of all global announcements?
+- Do we want an about page?
+
+
+
+Question of domain?
+- How to correspond with York so that we can use their subdomain?
+Unesco chair site. Katrin can create subdomains and link to our IP.
+
+
+
+Announcements: 
+- Archiving old announcements
+- Attachments: pdf or word, pictures(png)
+
+
+
+Delivery Date:
+- We've been following the timeline of our course, deadline for deliverables April 26th.
+Deadline: April 26th
+
+
+Data Protection
