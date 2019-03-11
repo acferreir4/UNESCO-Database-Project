@@ -7,7 +7,7 @@ def validate_field(value):
     return ''
 
 def validate_title(title, form_pk):
-    if form_pk and DynamicForms.object.get(id=form_pk) != title:
+    if form_pk and DynamicForms.objects.get(id=form_pk).title != title and DynamicForms.objects.filter(title=title):
         return 'The title must be changed to a unique value or kept the same!'
     elif DynamicForms.objects.filter(title=title) and form_pk is None:
         return 'The title must be unique!'
