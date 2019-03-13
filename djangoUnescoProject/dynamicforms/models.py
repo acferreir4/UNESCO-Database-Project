@@ -2,20 +2,6 @@ from django.db import models
 from datetime import date
 
 # Create your models here.
-'''
-class DynamicFormModel(models.Model):
-    title
-    type_ 
-
-    data 
-    #Have one char field as default
-    active = models.BooleanField(default=True)
-    def save(self, *args, **kwargs):
-        super().save(*args, **kwargs)
-        
-        for idx, question in enumerate(kwargs['questions']):
-            self.fields['Question {0}.'.format(idx + 1)] = models.TextField(help_text=question) 
-'''
 
 class DataTable(models.Model):
     form_id = models.ForeignKey('DynamicForms', on_delete=models.CASCADE)

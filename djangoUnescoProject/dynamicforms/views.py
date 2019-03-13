@@ -104,7 +104,7 @@ def form_answer(request, form_pk):
     if request.user.is_staff:
         return redirect('form-home')
     is_answer = True
-
+    check_title = False
     title, questions, question_nums = __get_form_information(request, form_pk) 
     if not title and not questions and not question_nums:
         return redirect('form-home')
@@ -113,7 +113,7 @@ def form_answer(request, form_pk):
     question_labels = {}
     for question in questions:
         question_labels[question.question_num] = question.question_text
-    form = DynamicQuestionForm(request.POST if request.method == 'POST' and request.POST.get('save') else None, title=title, question_nums=question_nums, question_labels=question_labels, form_questions=None, is_answer=is_answer)
+    form = DynamicQuestionForm(request.POST if request.method == 'POST' and request.POST.get('save') else None, title=title, question_nums=question_nums, question_labels=question_labels, form_questions=None, is_answer=is_answer, check_title=check_title)
     context = {
         'form': form,
         'form_title': form_title,

@@ -14,6 +14,7 @@ class DynamicQuestionForm(forms.Form):
         self.form_questions = kwargs.pop('form_questions')
         # Check to validate the form input if saving the form
         self.save = True if 'save' not in kwargs else kwargs.pop('save')
+        self.check_title = True if 'check_title' not in kwargs else kwargs.pop('check_title')
         self.title = kwargs.pop('title')
         # Variable used to check if the created form is meant for creating questions or answering them
         self.is_answer = kwargs.pop('is_answer')
@@ -25,7 +26,7 @@ class DynamicQuestionForm(forms.Form):
         if not self.title:
             self.fields['title'].widget.attrs.update(autofocus='autofocus')
         # Put an error message for the title field if it is empty when trying to save the form
-        if self.save:
+        if self.save and self.check_title:
             self.__validate_title_field()
 
         for i in range(self.question_nums):
