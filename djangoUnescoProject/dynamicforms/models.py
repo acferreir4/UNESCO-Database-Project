@@ -6,13 +6,10 @@ from datetime import date
 class DataTable(models.Model):
     form_id = models.ForeignKey('DynamicForms', on_delete=models.CASCADE)
     question_id = models.ForeignKey('Questions', on_delete=models.CASCADE)
-    #Change submitter_id back to use foreign key to user
-    #submitter_id = models.ForeignKey('users.User', on_delete=models.PROTECT)
-    submitter_id = models.CharField(max_length=100, blank=True, null=True)
+    submitter_id = models.ForeignKey('users.User', on_delete=models.PROTECT)
     answer = models.TextField()
-    is_active = models.BooleanField(default=True)
-
-
+    is_draft = models.BooleanField(default=True)
+    
 class DynamicForms(models.Model):
     #Change creator_id back to user foreign key to user
     #creator_id = models.ForeignKey('users.User', on_delete=models.PROTECT)
