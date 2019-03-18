@@ -9,6 +9,27 @@ from users.models import User
 # Create your views here.
 @login_required(redirect_field_name='login')
 def start_form(request):
+    if not request.user.is_staff:
+        # Create a mapping from form.id to status (complete, draft, new)
+        form_status = {}
+        user = User.objects.get(id=request.user.id)
+        for form in DynamicForms.objects.all():
+            dt_query = DataTable.objects.filter(form_id=form, submitter_id=user)
+            # Get the first question and if answer exists, status determined by 'is_draft'
+            # Otherwise if no answer exists, form is new
+            question = Questions.objects.get(form_id=form, question_num=1)
+            if dt_query.filter(question_id=question).exists():
+                dt_obj = dt_query.get(question_id=question)
+                if dt_obj.is_draft:
+                    form_status[form] = "In Progress"
+                else:
+                    form_status[form] = "Complete"
+            else:
+                form_status[form] = "New"
+        # We have to create a new 'forms' that makes this very unclean
+        # Reason being django refuses to support a dictionary that uses a jinja2 variable as a key
+        return render (request, 'dynamicforms/home.html', {'forms': form_status})
+
     return render (request, 'dynamicforms/home.html', {'forms': DynamicForms.objects.all()})
 
 @login_required    
