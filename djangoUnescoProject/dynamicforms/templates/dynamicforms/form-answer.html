@@ -2,7 +2,9 @@
 {% block buttongroup %}
     <div class="form-group">        
 		<!-- The value of 1 is just so that we can get the 'name' from request.POST.get('...') -->
+		{% if not hide_buttons %}
 		<button class="btn btn-outline-info" name="save" value="1" type="submit">Submit Answers</button>
         <button class="btn btn-outline-info float-right" name="temp_save" value="1" type="submit">Save Draft</button>
+		{% endif %}
     </div>
 {% endblock buttongroup %}

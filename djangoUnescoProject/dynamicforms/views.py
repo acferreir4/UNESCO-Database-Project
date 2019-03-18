@@ -112,11 +112,11 @@ def form_answer(request, form_pk):
     # The user presses either save button
     if request.method == 'POST':
         # Get the total # of questions in the form
-        question_inputs = [k for k in request.POST.keys() if "Question" in k]
+        questions = [k for k in request.POST.keys() if "Question" in k]
 
         # Map all submitted answers with question ID
         answered_questions = {}
-        for question in question_inputs:
+        for question in questions:
             answer = request.POST.get(question)
             question_id = question.split(' ')[-1]
             answered_questions[question_id] = answer
@@ -128,10 +128,12 @@ def form_answer(request, form_pk):
                 __save_final(form_pk, request.user.id, answered_questions)
                 return redirect('form-home')
             else:
-                messages.error(request, 'All questions must be answered before submitting!')
+                context = __build_answer_context(request, form_pk)
+                #messages.error(request,
+                #               'All questions must be answered before submitting!')
         elif request.POST.get('temp_save'):
             __save_draft(form_pk, request.user.id, answered_questions)
-            # Because we show the same page and changed the answers, we need to rebuild the context
+            # Rebuild the context to show the saved answers in draft
             context = __build_answer_context(request, form_pk)
         else:
             messages.error(request, 'Something went wrong!')
@@ -197,12 +199,10 @@ def __save_draft(form_pk, user_id, answered_questions):
         user = User.objects.get(id=user_id)        
         # If an entry exists, update the answer. Otherwise, create a new entry
         if DataTable.objects.filter(form_id=form, question_id=question).exists():
-            print("Updating: " + str(question_id) + " " + question.question_text + " -- |" + answer + "|")
             existing_entry = DataTable.objects.get(form_id=form, question_id=question)
             existing_entry.answer = answer
             existing_entry.save()
         elif answer:
-            print("New draft entry")
             DataTable.objects.create(form_id=form, question_id=question,
                                      submitter_id=user, answer=answer, is_draft=True)
 
@@ -228,7 +228,12 @@ def __save_final(form_pk, user_id, answered_questions):
             DataTable.objects.create(form_id=form, question_id=question,
                                      submitter_id=user, answer=answer, is_draft=False)
 
-"""Build a context with questions and saved draft answers for form-answer"""
+"""Build a context with questions and saved draft answers for form-answer
+
+Note that this function is called when showing the empty form for answering, and
+for after answering the form. Thus, we must be careful when creating a
+DynamicQuestionForm and be mindful of the current state in which we are creating it.
+"""
 def __build_answer_context(request, form_pk):
     is_answer = True
     check_title = False
@@ -248,20 +253,31 @@ def __build_answer_context(request, form_pk):
     form_questions = {}
     question_labels = {}
 
+    # Indicate if user is saving answers as draft
+    draft_or_display = False if request.POST.get('save') else True
+    # Indicate if user is saving answers
+    save = False
+
     for question in questions:
         question_labels[question.question_num] = question.question_text
         if dt_query.filter(question_id=question).exists():
+            save = True
             dt_obj = dt_query.get(question_id=question)
             answer = dt_obj.answer
             is_submitted = not dt_obj.is_draft
             form_questions[f'Question {question.question_num}'] = answer
+        else:
+            form_questions[f'Question {question.question_num}'] = ""
+
     form = DynamicQuestionForm(form_request, title=title, question_nums=question_nums,
                                question_labels=question_labels,
                                form_questions=form_questions, is_answer=is_answer,
-                               check_title=check_title, is_submitted=is_submitted)
+                               check_title=check_title, is_submitted=is_submitted,
+                               save=save, draft_or_display=draft_or_display)
     context = {
         'form': form,
         'form_title': form_title,
+        'hide_buttons': is_submitted,
     }
     
     return context
