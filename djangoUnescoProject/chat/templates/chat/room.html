@@ -14,6 +14,7 @@
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
     <link rel="stylesheet" href="{% static 'style.css' %}" />
+
     <title>Chat</title>
   </head>
 
@@ -94,8 +95,24 @@
     </div>
     <div class="content">
       <div class="contact-profile"> 
-        <p style="color: #2c3e50; font-size: 30px; margin: 9px 0px 0px 25px;
-        font-family: Helvetica, sans-serif; font-weight: bold; text-align: center;">{{ room_name_json|slice:"1:-1" }}</p>
+        {% block RoomTitle %}
+          {% for cr in chatRooms %}
+            {% if cr.name == room_name_json|slice:"1:-1" %}
+              {% if cr.category == "G" %}
+                <p style="color: #2c3e50; font-size: 30px; margin: 9px 0px 0px 25px;
+                  font-family: Helvetica, sans-serif; font-weight: bold; text-align: center;">{{ cr.name }}</p>
+              {% else %}
+                {% if user.is_staff %}
+                <p style="color: #2c3e50; font-size: 30px; margin: 9px 0px 0px 25px;
+                  font-family: Helvetica, sans-serif; font-weight: bold; text-align: center;">{{ cr.display_line_1 }}, {{ cr.display_line_2 }}</p>
+                {% else %}
+                  <p style="color: #2c3e50; font-size: 30px; margin: 9px 0px 0px 25px;
+                  font-family: Helvetica, sans-serif; font-weight: bold; text-align: center;">Admins</p>
+                {% endif %}
+              {% endif %}
+            {% endif %}
+          {% endfor %}
+        {% endblock RoomTitle %}
         
         {% if user.is_staff %}
           <div class="social-media">
@@ -105,15 +122,6 @@
       </div>
       <div class="messages" id="scrollDownHelper">
         <ul id="chat-log">
-          <!-- <li class="sent">
-            <img src="http://emilcarlsson.se/assets/mikeross.png" alt="" />
-            <p>How the hell am I supposed to get a jury to believe you when I am not even sure that I do?!</p>
-          </li>
-          <li class="replies">
-            <img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="" />
-            <p>When you're backed against the wall, break the god damn thing down.</p>
-          </li>
-        </ul> -->
       </div>
       <div class="message-input">
         <div class="wrap">
@@ -213,8 +221,6 @@
 
       var height = document.getElementById('scrollDownHelper').scrollHeight; - $('#scrollDownHelper').height(); 
       $('#scrollDownHelper').scrollTop(height);
-
-
     }
 </script>
 </body>

@@ -24,8 +24,8 @@ setup(
     install_requires=[
         "django",
         "django-crispy-forms",
-		"channels_redis",
-		"channels",
-		"pillow",
+	"channels_redis",
+	"channels",
+	"pillow",
     ],
 )

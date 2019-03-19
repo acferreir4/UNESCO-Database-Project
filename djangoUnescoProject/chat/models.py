@@ -1,9 +1,12 @@
 from users.models import User
 from django.db import models
+from django.core.validators import RegexValidator
+
+alphanumeric = RegexValidator(r'^[0-9a-zA-Z\d\-_]*$', 'Only alphanumeric characters, _ and -  are allowed. No Space.')
 
 class ChatRooms(models.Model):
-    name = models.CharField(max_length=50)
-    category = models.CharField(max_length=1)
+    name = models.CharField(max_length=50,validators=[alphanumeric])
+    category = models.CharField(max_length=1,choices=(("G", "Group Room"),("P", "Personal Room")))
     display_line_1 = models.CharField(max_length=50, null=True)
     display_line_2 = models.CharField(max_length=50, null=True)
 

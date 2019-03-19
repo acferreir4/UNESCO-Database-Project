@@ -20,7 +20,7 @@ from users import views as user_views
 from institutions import views as inst_views
 from django.conf import settings
 from django.conf.urls.static import static
-from dynamicforms import views as dynamicforms_views
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('users.urls')),
@@ -40,8 +40,7 @@ urlpatterns = [
         auth_views.PasswordResetCompleteView.as_view(template_name='users/password_reset_complete.html'), 
         name='password_reset_complete'),
     path('chat/', include('chat.urls', namespace='chat')),
-    path('create-form', dynamicforms_views.create_form, name="create-form"),
-
+    path('forms/', include('dynamicforms.urls')),
 ]
 
 admin.site.site_header = "UNESCO Administration"

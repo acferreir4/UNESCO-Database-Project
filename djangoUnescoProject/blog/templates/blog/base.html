@@ -32,6 +32,7 @@
                     <a class="nav-item nav-link" href="{% url 'blog-home' %}">Home</a>
                     <a class="nav-item nav-link" href="{% url 'blog-about' %}">About</a>
                     {% if user.is_authenticated %}
+                        <a class="nav-item nav-link" href="{% url 'form-home' %}">Forms</a>
                         <a class="nav-item nav-link" href="/chat/Main_Room">Chat</a>
                         <a class="nav-item nav-link" href="{% url 'institution-detail' user.institution.id %}">My Institution</a>
                         <a class="nav-item nav-link" href="{% url 'profile' %}">My Profile</a>
@@ -74,7 +75,7 @@
                       <a class="list-group-item" href="{% url 'post-create' %}">
                           Create Announcement
                       </a>
-                      <a class="list-group-item" href="{% url 'create-form' %}">
+                      <a class="list-group-item" href="{% url 'form-create' %}">
                           Create Custom Form
                       </a>
                       <a class="list-group-item" href="{% url 'admin:index' %}">

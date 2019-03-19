@@ -9,7 +9,7 @@ import json
 import logging
 
 def index(request):
-    return render(request, 'chat/index.html', {})
+    return render(request, 'chat/http_400.html', {})
 
 @login_required
 def room(request, room_name):
@@ -31,7 +31,7 @@ def room(request, room_name):
 	        'roomAccess': RoomAccess.objects.all(),
 	    })
     else:
-        return render(request, 'chat/accessDenied.html')
+        return render(request, 'chat/http_401.html')
 # def list(request):
 #     context = {
 #         'chatRooms': ChatRooms.objects.all()
