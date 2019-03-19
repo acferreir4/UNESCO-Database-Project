@@ -6,6 +6,7 @@ from django.contrib.auth.decorators import login_required
 from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm
 from .models import User
 
+@login_required 
 def register(request):
     if not request.user.is_staff:
         return redirect('access-denied')
