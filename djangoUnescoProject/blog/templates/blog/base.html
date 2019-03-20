@@ -30,7 +30,7 @@
               <div class="collapse navbar-collapse" id="navbarToggle">
                 <div class="navbar-nav mr-auto">
                     <a class="nav-item nav-link" href="{% url 'blog-home' %}">Home</a>
-                    <a class="nav-item nav-link" href="{% url 'blog-about' %}">About</a>
+                    <!-- <a class="nav-item nav-link" href="{% url 'blog-about' %}">About</a> -->
                     {% if user.is_authenticated %}
                         <a class="nav-item nav-link" href="{% url 'form-home' %}">Forms</a>
                         <a class="nav-item nav-link" href="/chat/Main_Room">Chat</a>
@@ -53,6 +53,7 @@
 
         <main role="main" class="container">
           <div class="row">
+            <!-- Messages -->
             <div class="col-md-8">
                 {% if messages %}
                     {% for message in messages %}
@@ -63,8 +64,11 @@
                 {% endif %}
                 {% block content %}{% endblock %}
             </div>
-            {% if user.is_authenticated and user.is_staff %}
+
+            <!-- Sidebar -->
             <div class="col-md-4">
+              <!-- Admin Sidebar -->
+              {% if user.is_authenticated and user.is_staff %}
               <div class="content-section">
                 <h3>Admin Functions</h3>
                 <p class='text-muted'>
@@ -90,22 +94,26 @@
                   </ul>
                 </p>
               </div>
-            </div>
-            {% else %}
-            <div class="col-md-4">
+              {% endif %}
+
+              <!-- User and admin sidebar -->
+              {% if user.is_authenticated %}
               <div class="content-section">
-                <h3>Our Sidebar</h3>
-                <p class='text-muted'>You can put any information here you'd like.
+                <h3>Account Management</h3>
+                <p class='text-muted'>
                   <ul class="list-group">
-                    <li class="list-group-item list-group-item-light">Latest Posts</li>
-                    <li class="list-group-item list-group-item-light">Announcements</li>
-                    <li class="list-group-item list-group-item-light">Calendars</li>
-                    <li class="list-group-item list-group-item-light">etc</li>
+                      <a class="list-group-item" href="{% url 'profile' %}">
+                        Update Contact Information
+                    </a>
+                    <a class="list-group-item" href="{% url 'change-password' %}">
+                        Change Password
+                    </a>
                   </ul>
                 </p>
               </div>
+              {% else %}
+              {% endif %}
             </div>
-            {% endif %}
           </div>
         </main>
 

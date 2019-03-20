@@ -22,7 +22,7 @@ SECRET_KEY = '=&p=5dbl*=n4i4edb&vimog!4si)fl5kj6y@(khj*%7gw$e_b_'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['159.89.124.218', '127.0.0.1']
+ALLOWED_HOSTS = ['159.89.124.218', '127.0.0.1', 'localhost']
 
 # Application definition
 
@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'institutions.apps.InstitutionsConfig', 
     'dynamicforms.apps.DynamicformsConfig',
     'crispy_forms',
+    'phonenumber_field',
 ]
 
 
@@ -157,7 +158,9 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = os.environ.get('EMAIL_USER')
-EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_PASS')
+EMAIL_HOST_USER = 'indigenous.unesco.education@gmail.com'
+EMAIL_HOST_PASSWORD = 'gardenVegetable'
+#EMAIL_HOST_USER = os.environ.get('EMAIL_USER')
+#EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_PASS')
 
 AUTH_USER_MODEL = 'users.User'

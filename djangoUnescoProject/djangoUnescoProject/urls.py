@@ -26,6 +26,8 @@ urlpatterns = [
     path('', include('users.urls')),
     path('', include('blog.urls')),
     path('', include('institutions.urls')),
+    path('chat/', include('chat.urls', namespace='chat')),
+    path('forms/', include('dynamicforms.urls')),
     path('oops/', user_views.accessDenied, name='access-denied'),
     path('password-reset/', 
         auth_views.PasswordResetView.as_view(template_name='users/password_reset.html'), 
@@ -39,8 +41,6 @@ urlpatterns = [
     path('password-reset-complete/', 
         auth_views.PasswordResetCompleteView.as_view(template_name='users/password_reset_complete.html'), 
         name='password_reset_complete'),
-    path('chat/', include('chat.urls', namespace='chat')),
-    path('forms/', include('dynamicforms.urls')),
 ]
 
 admin.site.site_header = "UNESCO Administration"

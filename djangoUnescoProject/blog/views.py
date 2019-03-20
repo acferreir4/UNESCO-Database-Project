@@ -44,7 +44,7 @@ class PostDetailView(DetailView):
 
 class PostCreateView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
     model = Post
-    fields = ['title', 'content', 'date_expire', 'fileAttachment', 'imageAttachment']
+    fields = ['title', 'content', 'date_expired', 'fileAttachment', 'imageAttachment']
     success_url = '/'
 
     def form_valid(self, form):
@@ -57,7 +57,7 @@ class PostCreateView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
 
 class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Post
-    fields = ['title', 'content', 'date_expire', 'fileAttachment', 'imageAttachment']
+    fields = ['title', 'content', 'date_expired', 'fileAttachment', 'imageAttachment']
 
     def form_valid(self, form):
         form.instance.author = self.request.user
