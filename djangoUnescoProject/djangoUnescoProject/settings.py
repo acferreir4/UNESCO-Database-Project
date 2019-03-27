@@ -164,3 +164,30 @@ EMAIL_HOST_PASSWORD = 'gardenVegetable'
 #EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_PASS')
 
 AUTH_USER_MODEL = 'users.User'
+
+
+# A sample logging configuration. The only tangible logging
+# performed by this configuration is to send an email to
+# the site admins on every HTTP 500 error when DEBUG=False.
+# See http://docs.djangoproject.com/en/dev/topics/logging for
+# more details on how to customize your logging configuration.
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'file': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': os.path.join(BASE_DIR, 'logs/System.log'),
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['file'],
+            'level': 'DEBUG',
+            'propagate': True,
+            'maxBytes': 1024*1024*15, # 15MB
+            'backupCount': 10, #10 historical versions
+        },
+    },
+}
