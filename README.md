@@ -46,9 +46,15 @@ sudo apt install redis-server
 pip install asgi_redis
 pip install asgiref==2.2.0
 pip install channels_redis
+pip install django-phonenumber-field
+pip install phonenumbers
 /etc/init.d/redis-server start <<if not started>>
 git clone https://github.com/acferreir4/UNESCO-Database-Project.git
 cd UNESCO-Database-Project/djangoUnescoProject/
+python manage.py runserver migrate
+python manage.py shell
+	>>exec(open('scripts/populateDb.py').read())
+	>>quit()
 python manage.py runserver 159.89.124.218:8000
 ```
 
