@@ -8,6 +8,8 @@ from django.contrib.auth.decorators import login_required
 # Create your views here.
 @login_required(redirect_field_name='login')
 def start_form(request):
+    if request.method == 'GET':
+        print(request.GET.get('download'))
     return render (request, 'dynamicforms/home.html', {'forms': DynamicForms.objects.all()})
 
 @login_required    
@@ -119,7 +121,7 @@ def form_answer(request, form_pk):
         'form_title': form_title,
     }
     return render (request, 'dynamicforms/form-answer.html', context)
-
+   
 # Database related functions that either manipulate or retrieve it
 def __get_form_information(request, form_pk):
     try:

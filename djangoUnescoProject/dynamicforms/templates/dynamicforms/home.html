@@ -1,5 +1,6 @@
 {% extends "blog/base.html" %}
 {% load crispy_forms_tags %}
+{% load static %}
 {% block content %}
     {% if user.is_staff %}
         <div class="content-section">
@@ -8,6 +9,7 @@
                 {% for form in forms %}
                     <li class="list-group-item">
                         <a class="mr-2" style="text-overflow: ellipsis; max-width: 75%" href="{% url 'form-edit' form.id %}">{{form.title}}</a>
+                        <form method="GET" style="float: right;"><button class="btn btn-outline-info" style="background-color: Transparent; background-repeat: no-repeat; border: none; cursor: pointer;" name="download" value={{form.id}} type="submit"><img style="height: 30px; width: 30px;" src="{% static 'download_icon_no_watermark.png' %}" alt="Download"/></button></form>
                     </li>
                 {% endfor %}
             </ul>
