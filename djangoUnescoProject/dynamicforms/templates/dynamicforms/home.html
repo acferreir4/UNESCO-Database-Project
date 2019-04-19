@@ -19,9 +19,9 @@
     <div class="content-section">
             <h2 class="h2 border-bottom mb-4">Forms to Answer</h2>
             <ul class="list-group" style="margin-bottom: 30px">
-                {% for form in forms %}
+                {% for form, status in forms.items %}
                     <li class="list-group-item">
-                        <a class="mr-2" style="text-overflow: ellipsis; max-width: 75%" href="{% url 'form-answer' form.id %}">{{form.title}}</a>
+							<a class="mr-2" style="text-overflow: ellipsis; max-width: 75%" href="{% url 'form-answer' form.id %}">{{form.title}} -- {{status}}</a>
                     </li>
                 {% endfor %}
             </ul>

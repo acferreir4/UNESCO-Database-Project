@@ -22,7 +22,7 @@ class RoomAccess(models.Model):
     roomName = models.ForeignKey(ChatRooms, related_name='roomName_RoomAccess', on_delete=models.CASCADE)
 
     class Meta:
-        verbose_name_plural = "Room Accesses"
+        verbose_name_plural = "Room Access"
 
     def __str__(self):
         return self.user.username

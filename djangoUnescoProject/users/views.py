@@ -1,24 +1,59 @@
 import csv
+import random
+import string
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib import messages
+from django.contrib.auth import update_session_auth_hash
+from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.decorators import login_required
+from django.core.mail import send_mail
+from django.template.loader import render_to_string
 from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm
 from .models import User
 
+@login_required 
 def register(request):
     if not request.user.is_staff:
         return redirect('access-denied')
     if request.method == 'POST':
         form = UserRegisterForm(request.POST)
         if form.is_valid():
+            temp_pass = randomPassword()
+            form.cleaned_data['password1'] = temp_pass
+            form.cleaned_data['password2'] = temp_pass
+            request.user._temp_pass = temp_pass
             form.save()
+            
             username = form.cleaned_data.get('username')
-            messages.success(request, f'Account for user %s has been created!' % username)
+            email = form.cleaned_data.get('email')
+            name = f'%s %s' % (form.cleaned_data.get('first_name'), form.cleaned_data.get('last_name'))
+            role = form.cleaned_data.get('role')
+            send_registration_email(username, email, name, role, temp_pass)
+
+            messages.success(request, f'Account for user %s has been created! An email has been sent to %s with instructions to change their password.' % (username, email))
             return redirect('register')
     else:
         form = UserRegisterForm()
     return render(request, 'users/register.html', {'form':form})
+
+def randomPassword(stringLength=10):
+    """Generate a random string of fixed length."""
+    code = string.ascii_letters + string.digits
+    return ''.join(random.choice(code) for i in range(stringLength))
+
+def send_registration_email(username, email, name, role, temp_password):
+    subject = f'Welcome %s to UNESCO Indigenous Research!' % name
+    send_mail(
+            subject = subject,
+            message = '',
+            from_email = '',
+            recipient_list = [email],
+            html_message = render_to_string(
+                'users/registration_email.html', {'username': username, 'role': role, 'temp_password': temp_password}
+                ),
+            fail_silently=False,
+            )
 
 @login_required
 def profile(request):
@@ -28,7 +63,7 @@ def profile(request):
         if u_form.is_valid() and p_form.is_valid():
             u_form.save()
             p_form.save()
-            messages.success(request, f'Your account has been updated!')
+            messages.success(request, f'Your contact information has been updated!')
             return redirect('profile')
     else:
         u_form = UserUpdateForm(instance=request.user)
@@ -40,6 +75,21 @@ def profile(request):
     }
 
     return render(request, 'users/profile.html', context)
+
+@login_required
+def change_password(request):
+    if request.method == 'POST':
+        form = PasswordChangeForm(request.user, request.POST)
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request, user)
+            messages.success(request, 'Your password was successfully updated!')
+            return redirect('change-password')
+        else:
+            messages.error(request, 'Please correct the error below.')
+    else:
+        form = PasswordChangeForm(request.user)
+    return render(request, 'users/change_password.html', {'form':form})
 
 def accessDenied(request):
     return render(request, 'users/access_denied.html')

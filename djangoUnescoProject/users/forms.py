@@ -1,25 +1,42 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from .models import User, Profile
+from phonenumber_field.modelfields import PhoneNumberField
+from phonenumber_field.widgets import PhoneNumberPrefixWidget
 
 class UserRegisterForm(UserCreationForm):
     email = forms.EmailField()
+    phone_number = PhoneNumberField(
+            #widget=PhoneNumberPrefixWidget(attrs={'class': 'form-control'}),
+            error_messages={'require': 'Enter a valid phone number. Format: +1234567890'}
+            )
+    password1 = None
+    password2 = None
+
+    #def __init__(self, *args, **kwargs):
+        #super(UserRegisterForm, self).__init__(*args, **kwargs)
+        #del self.fields['password1']
+        #del self.fields['password2']
 
     #Gives us nested namespace for configuration, keeps configs in one place
     #Within config, the model that will be affected is the User model 
     #(i.e. form.save() saves new field email into User model)
     class Meta:
         model = User
-        fields = ['username', 'first_name', 'last_name', 'email', 'is_staff', 'role', 'institution', 'password1', 'password2']
+        fields = ['username', 'first_name', 'last_name', 'email', 'phone_number', 'is_staff', 'role', 'institution']
 
 class UserUpdateForm(forms.ModelForm):
     email = forms.EmailField()
+    phone_number = PhoneNumberField(
+            #widget=PhoneNumberPrefixWidget(attrs={'class': 'form-control'}),
+            error_messages={'require': 'Enter a valid phone number. Format: +1234567890'}
+            )
 
     class Meta:
         model = User
-        fields = ['username', 'first_name', 'last_name', 'role', 'email']
+        fields = ['email', 'phone_number']
 
 class ProfileUpdateForm(forms.ModelForm):
     class Meta:
         model = Profile
-        fields = ['image']
+        fields = []
