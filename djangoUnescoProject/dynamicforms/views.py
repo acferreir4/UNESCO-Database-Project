@@ -1,3 +1,5 @@
+import csv
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
@@ -31,7 +33,7 @@ def start_form(request):
         return render (request, 'dynamicforms/home.html', {'forms': form_status})
     if request.method == 'GET':
         if request.GET.get('download'):
-              print(f"Do stuff with this info: form {request.GET.get('download')}")    
+            return export_form(request)
     return render (request, 'dynamicforms/home.html', {'forms': DynamicForms.objects.all()})
 
 @login_required    
@@ -304,3 +306,41 @@ def __build_answer_context(request, form_pk):
     }
     
     return context
+
+def export_form(request):
+    """Return a CSV file of USERNAME, Q1, Q2, ... QN for all users that answered the
+    form"""
+    # Get the form object from id
+    form = DynamicForms.objects.get(id=request.GET.get('download'))
+
+    # Prepare the HttpResponse object
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename="{}.csv"'.format(form.title)
+    writer = csv.writer(response)
+
+    # Construct CSV columns with username and questions in form
+    csv_columns = ['Username',]
+    questions = Questions.objects.filter(form_id=form)
+    for question in questions:
+        csv_columns.append(question.question_text)
+    writer.writerow(csv_columns)
+    
+    # Populate CSV with columns of all users who answered form & their answers
+    # If a user answered a question and it's not a draft, then it can be assumed that
+    # they answered the whole form
+    respondents = DataTable.objects.filter(form_id=form, question_id=question,
+                                           is_draft=False)
+    # For each person who answered the form
+    for respondent in respondents:
+        # Get their username
+        user = respondent.submitter_id
+        username = user.username
+        csv_row = [username,]
+        # Get all their answers
+        answers = DataTable.objects.filter(submitter_id=user, form_id=form)
+        for answer in answers:
+            csv_row.append(answer)
+        # Write the row
+        writer.writerow(csv_row)
+
+    return response
