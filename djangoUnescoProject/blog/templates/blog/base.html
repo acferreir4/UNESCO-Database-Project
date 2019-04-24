@@ -100,7 +100,7 @@
               {% if user.is_authenticated %}
               <div class="content-section">
                 <h3>Account Management</h3>
-                <p class='text-muted'>
+                <p class='text-muted'> You are logged in as <a href="{% url 'profile' %}">{{ user.username }}</a>.
                   <ul class="list-group">
                       <a class="list-group-item" href="{% url 'profile' %}">
                         Update Contact Information
