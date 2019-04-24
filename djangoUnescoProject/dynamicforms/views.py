@@ -339,7 +339,7 @@ def export_form(request):
         # Get all their answers
         answers = DataTable.objects.filter(submitter_id=user, form_id=form)
         for answer in answers:
-            csv_row.append(answer)
+            csv_row.append(answer.answer)
         # Write the row
         writer.writerow(csv_row)
 
