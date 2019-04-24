@@ -319,7 +319,7 @@ def export_form(request):
     writer = csv.writer(response)
 
     # Construct CSV columns with username and questions in form
-    csv_columns = ['Username',]
+    csv_columns = ['Username', 'Institution',]
     questions = Questions.objects.filter(form_id=form)
     for question in questions:
         csv_columns.append(question.question_text)
@@ -335,7 +335,8 @@ def export_form(request):
         # Get their username
         user = respondent.submitter_id
         username = user.username
-        csv_row = [username,]
+        institution = user.institution.name
+        csv_row = [username, institution]
         # Get all their answers
         answers = DataTable.objects.filter(submitter_id=user, form_id=form)
         for answer in answers:
