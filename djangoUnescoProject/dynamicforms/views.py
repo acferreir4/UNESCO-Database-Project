@@ -29,7 +29,9 @@ def start_form(request):
         # We have to create a new 'forms' that makes this very unclean
         # Reason being django refuses to support a dictionary that uses a jinja2 variable as a key
         return render (request, 'dynamicforms/home.html', {'forms': form_status})
-
+    if request.method == 'GET':
+        if request.GET.get('download'):
+              print(f"Do stuff with this info: form {request.GET.get('download')}")    
     return render (request, 'dynamicforms/home.html', {'forms': DynamicForms.objects.all()})
 
 @login_required    
@@ -160,7 +162,7 @@ def form_answer(request, form_pk):
             messages.error(request, 'Something went wrong!')
 
     return render (request, 'dynamicforms/form-answer.html', context)
-
+   
 # Database related functions that either manipulate or retrieve it
 def __get_form_information(request, form_pk):
     try:
