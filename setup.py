@@ -29,5 +29,6 @@ setup(
 	"pillow",
 	"django-phonenumber-field",
 	"phonenumbers",
+	"django-heroku",
     ],
 )
