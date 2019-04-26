@@ -114,11 +114,9 @@
           {% endfor %}
         {% endblock RoomTitle %}
         
-        {% if user.is_staff %}
-          <div class="social-media">
-            <i class="fa" aria-hidden="true"><a style="background: #2c3e50; font-size: 20px; color: #ffffff; border-radius: 15px; text-transform: uppercase; font-family: Helvetica, sans-serif; font-weight: bold; text-align: center;" class="list-group-item" href="download/">Download Chat</a></i>
-          </div>
-        {% endif %}
+        <div class="social-media">
+          <i class="fa" aria-hidden="true"><a style="background: #2c3e50; font-size: 20px; color: #ffffff; border-radius: 15px; text-transform: uppercase; font-family: Helvetica, sans-serif; font-weight: bold; text-align: center;" class="list-group-item" href="download/">Download Chat</a></i>
+        </div>
       </div>
       <div class="messages" id="scrollDownHelper">
         <ul id="chat-log">

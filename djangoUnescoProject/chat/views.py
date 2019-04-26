@@ -39,8 +39,8 @@ def room(request, room_name):
 #     return render(request, 'chat/room.html', context)
 
 def downloadChat(request, room_name):
-    if not request.user.is_staff:
-        return render(request, 'chat/accessDenied.html')
+    # if not request.user.is_staff:
+    #     return render(request, 'chat/accessDenied.html')
     # Create the HttpResponse object with the appropriate CSV header.
     response = HttpResponse(content_type='text/csv')
     response['Content-Disposition'] = 'attachment; filename="chat-transcript.csv"'

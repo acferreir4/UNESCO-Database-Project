@@ -5,16 +5,20 @@ from users.models import User
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from .models import Post
 from django.core.files.storage import FileSystemStorage
+from django.contrib.auth.decorators import login_required
 
 # handles traffic from the homepage of our blog
 # request argument must be there
 # views always return HttpResponse or Exception
+@login_required
 def home(request):
     context = {
         'possts': Post.objects.all()
     }
     return render(request, 'blog/home.html', context) 
 
+    
+@login_required
 def about(request):
     return render(request, 'blog/about.html', {'title': 'About'}) 
 
@@ -58,6 +62,7 @@ class PostCreateView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
 class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Post
     fields = ['title', 'content', 'date_expired', 'fileAttachment', 'imageAttachment']
+    success_url = '/'
 
     def form_valid(self, form):
         form.instance.author = self.request.user
