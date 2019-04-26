@@ -1,0 +1,226 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700,300' rel='stylesheet' type='text/css'>
+    <script src="https://use.typekit.net/hoy3lrg.js"></script>
+    <script>try{Typekit.load({ async: true });}catch(e){}</script>
+    <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css'>
+    <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.2/css/font-awesome.min.css'>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <link rel="stylesheet" href="{% static 'style.css' %}" />
+
+    <title>Chat</title>
+  </head>
+
+<body>
+  <div id="frame">
+    <div id="sidepanel">
+      <div id="home-back-btn">
+          <a href="/">
+            <!-- <img id="profile-img" src="\static\media\home.png" class="online" alt="" /> -->
+            <p style="font-size: 20px; text-transform: uppercase;
+              font-family: Helvetica, sans-serif; font-weight: bold; text-align: center;">Go Back</p>
+          </a>
+      </div>
+      <div id="profile">
+        <div class="wrap">
+          <img id="profile-img" src="\static\media\me.png" class="online" alt="" />
+          <p style="color: white; font-size: 15px; text-transform: uppercase;
+        font-family: Helvetica, sans-serif; font-weight: bold; text-align: center;">{{ user.username }} </p>
+
+        </div>
+      </div>
+      <div id="contacts">
+        <ul>
+          {% block content %}
+            {% if user.is_staff %}
+              {% for cr in chatRooms %}
+                <li class="contact">
+                  <a href="/chat/{{ cr.name }}">
+                    <div class="wrap">
+                      {% if cr.category == "P" %} 
+                        <img src="\static\media\user.png" alt="User" />
+                        <div class="meta">
+                          <p class="name" >{{ cr.display_line_1 }}</p>
+                          <p class="preview">{{ cr.display_line_2 }}</p>
+                        </div>
+                      {% else %}
+                        <img src="\static\media\group.png" alt="Group" />
+                        <div class="meta">
+                          <p class="name" >{{ cr.name }}</p>
+                          <p class="preview">{{ cr.display_line_1 }}</p>
+                          <p class="preview">{{ cr.display_line_2 }}</p>
+                        </div>
+                      {% endif %}
+                    </div>
+                  </a>
+                </li>
+              {% endfor %}
+            {% else %}
+              {% for ra in roomAccess %}
+              {% if ra.user == user %}
+                <li class="contact">
+                  <a href="/chat/{{ ra.roomName.name }}">
+                    <div class="wrap">
+                      {% if ra.roomName.category == "P" %} 
+                        <img src="\static\media\user.png" alt="User" />
+                        <div class="meta">
+                          <p class="name">Admins</p>
+                          <p class="preview">All admins are in this</p>
+                          <p class="preview">common chat room</p>
+                        </div>
+                      {% else %}
+                        <img src="\static\media\group.png" alt="Group" />
+                        <div class="meta">
+                          <p class="name" >{{ ra.roomName.name }}</p>
+                          <p class="preview">{{ ra.roomName.display_line_1 }}</p>
+                          <p class="preview">{{ ra.roomName.display_line_2 }}</p>
+                        </div>
+                      {% endif %}
+                    </div>
+                  </a>
+                </li>
+              {% endif %} 
+              {% endfor %}
+            {% endif %}    
+          {% endblock content %}  
+        </ul>
+      </div>
+    </div>
+    <div class="content">
+      <div class="contact-profile"> 
+        {% block RoomTitle %}
+          {% for cr in chatRooms %}
+            {% if cr.name == room_name_json|slice:"1:-1" %}
+              {% if cr.category == "G" %}
+                <p style="color: #2c3e50; font-size: 30px; margin: 9px 0px 0px 25px;
+                  font-family: Helvetica, sans-serif; font-weight: bold; text-align: center;">{{ cr.name }}</p>
+              {% else %}
+                {% if user.is_staff %}
+                <p style="color: #2c3e50; font-size: 30px; margin: 9px 0px 0px 25px;
+                  font-family: Helvetica, sans-serif; font-weight: bold; text-align: center;">{{ cr.display_line_1 }}, {{ cr.display_line_2 }}</p>
+                {% else %}
+                  <p style="color: #2c3e50; font-size: 30px; margin: 9px 0px 0px 25px;
+                  font-family: Helvetica, sans-serif; font-weight: bold; text-align: center;">Admins</p>
+                {% endif %}
+              {% endif %}
+            {% endif %}
+          {% endfor %}
+        {% endblock RoomTitle %}
+        
+        <div class="social-media">
+          <i class="fa" aria-hidden="true"><a style="background: #2c3e50; font-size: 20px; color: #ffffff; border-radius: 15px; text-transform: uppercase; font-family: Helvetica, sans-serif; font-weight: bold; text-align: center;" class="list-group-item" href="download/">Download Chat</a></i>
+        </div>
+      </div>
+      <div class="messages" id="scrollDownHelper">
+        <ul id="chat-log">
+      </div>
+      <div class="message-input">
+        <div class="wrap">
+        <input id="chat-message-input" type="text" name='sendBox' placeholder="Write your message..." />
+        <button id="chat-message-submit" class="submit">
+          <i class="fa fa-paper-plane" aria-hidden="true"></i>
+        </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<script src="{% static 'main.js' %}"></script>
+<script src="{% static 'reconnecting-websocket.js' %}"></script>
+<script>
+    var roomName = {{ room_name_json }};
+    var username = {{ username }};
+    var chatSocket = new ReconnectingWebSocket(
+        'ws://' + window.location.host +
+        '/ws/chat/' + roomName + '/');
+    chatSocket.onopen = function(e) {
+      fetchMessages();
+    }
+    chatSocket.onmessage = function(e) {
+        var data = JSON.parse(e.data);
+        if (data['command'] === 'messages') {
+          for (let i=0; i<data['messages'].length; i++) {
+            createMessage(data['messages'][i]);
+          }
+        } else if (data['command'] === 'new_message'){
+          createMessage(data['message']);
+        }
+    };
+    chatSocket.onclose = function(e) {
+        console.error('Chat socket closed unexpectedly');
+    };
+    document.querySelector('#chat-message-input').onkeyup = function(e) {
+        if (e.keyCode === 13) {  // enter, return
+            document.querySelector('#chat-message-submit').click();
+        }
+    };
+    document.querySelector('#chat-message-submit').onclick = function(e) {
+        var messageInputDom = document.getElementById('chat-message-input');
+        var message = messageInputDom.value;
+        chatSocket.send(JSON.stringify({
+            'command': 'new_message',
+            'message': message,
+            'from': username,
+            'in_room': roomName
+        }));
+        messageInputDom.value = '';
+    };
+    function fetchMessages() {
+      chatSocket.send(JSON.stringify({'command': 'fetch_messages', 'RName': roomName }));
+    }
+    function createMessage(data) {
+      var author = data['author'];
+      var fullName = data['fullName'];
+      var msgListTag = document.createElement('li');
+      var imgTag = document.createElement('img');
+      var pTag = document.createElement('p');
+      var pcTag = document.createElement('h5');
+      var brTag = document.createElement('br');
+      var timeTag = document.createElement('h6');
+      pTag.textContent = fullName;
+      pTag.style='font-weight: bold';
+      pTag.appendChild(brTag);
+      pcTag.textContent = data.content;
+      pTag.appendChild(pcTag);
+      var tmpTime = Math.round((new Date().getTime() - new Date(data.timestamp).getTime())/60000);
+      if (tmpTime < 60) {
+        timeTag.textContent = `${tmpTime} minutes ago`;
+      } else if (tmpTime < 1440) {
+        tmpTime = Math.round(tmpTime/60);
+        timeTag.textContent = `${tmpTime} hours ago`;
+      } else {
+        tmpTime = Math.round(tmpTime/1440);
+        timeTag.textContent = `${tmpTime} days ago`;
+      }
+      pTag.appendChild(timeTag);
+
+      if (author === username) {
+        imgTag.src = '/static/media/me.png';
+      } else {
+        imgTag.src = '/static/media/user.png';
+      }
+
+      
+      if (author === username) {
+        msgListTag.className = 'sent';
+      } else {
+        msgListTag.className = 'replies';
+      }
+      msgListTag.appendChild(imgTag);
+      msgListTag.appendChild(pTag);
+      document.querySelector('#chat-log').appendChild(msgListTag);
+
+      var height = document.getElementById('scrollDownHelper').scrollHeight; - $('#scrollDownHelper').height(); 
+      $('#scrollDownHelper').scrollTop(height);
+    }
+</script>
+</body>
+
+</html>

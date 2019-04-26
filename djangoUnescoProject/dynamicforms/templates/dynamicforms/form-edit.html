@@ -1,8 +1,0 @@
-{% extends "./form.html" %}
-{% block buttongroup %}
-    <div class="form-group">        
-        <button class="btn btn-outline-info" name="update" value={{form_pk}} type="submit">Update Form</button>
-
-        <button class="btn btn-outline-info float-right" name="delete" type="submit" value={{form_pk}} onclick="return confirm('Warning: By deleting this form, you will be also deleting any answers related to this form!');">Delete Form</button>
-    </div>
-{% endblock buttongroup %}
