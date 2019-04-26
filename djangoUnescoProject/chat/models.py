@@ -42,7 +42,8 @@ class Message(models.Model):
     def last_10_messages(RName):
         rm = ChatRooms.objects.filter(name=RName).first()
         msg = Message.objects.filter(chatRoom=rm)
-        return msg.order_by('timestamp').all()
+        last_100 = Message.objects.filter(chatRoom=rm).order_by('-timestamp')[:100]
+        return reversed(last_100)
         # load all messages
         # return Message.objects.order_by('timestamp').all()
         # example for filtering
