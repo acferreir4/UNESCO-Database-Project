@@ -22,10 +22,14 @@ setup(
 
     # Dependent packages (distributions)
     install_requires=[
+        "gunicorn",
         "django",
         "django-crispy-forms",
+        "django-heroku",
 	"channels_redis",
 	"channels",
 	"pillow",
+        "django-phonenumber-field",
+	"phonenumbers",
     ],
 )
