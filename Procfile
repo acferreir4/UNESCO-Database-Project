@@ -1,1 +1,1 @@
-web: gunicorn unesco-app.wsgi
+web: gunicorn wsgi
