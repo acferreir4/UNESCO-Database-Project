@@ -8,6 +8,10 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 """
 
 import os
+import json
+
+with open('/etc/config.json') as config_file:
+    config = json.load(config_file)
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -17,12 +21,13 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '=&p=5dbl*=n4i4edb&vimog!4si)fl5kj6y@(khj*%7gw$e_b_'
+#SECRET_KEY = '=&p=5dbl*=n4i4edb&vimog!4si)fl5kj6y@(khj*%7gw$e_b_'
+SECRET_KEY = config['SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['68.183.199.248', '127.0.0.1', 'localhost']
+ALLOWED_HOSTS = ['68.183.199.248', '178.128.227.250', '127.0.0.1', 'localhost']
 
 # Application definition
 
@@ -93,26 +98,27 @@ CHANNEL_LAYERS = {
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
-#DATABASES = {
-#    'default': {
-#        'ENGINE': 'django.db.backends.sqlite3',
-#        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-#        'TEST': {
-#            'NAME': os.path.join(BASE_DIR, 'db_test.sqlite3')
-#        }
-#    }
-#}
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'unescodb',
-        'USER': 'unesco_admin',
-        'PASSWORD': 'indigenous123',
-        'HOST': 'localhost',
-        'PORT': '',
+if DEBUG:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+            'TEST': {
+                'NAME': os.path.join(BASE_DIR, 'db_test.sqlite3')
+            }
+        }
     }
-}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': config['DB_NAME'], 
+            'USER': config['DB_USER'],
+            'PASSWORD': config['DB_PASS'],
+            'HOST': 'localhost',
+            'PORT': '',
+        }
+    }
 
 
 # Password validation
@@ -171,10 +177,8 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'indigenous.unesco.education@gmail.com'
-EMAIL_HOST_PASSWORD = 'gardenVegetable'
-#EMAIL_HOST_USER = os.environ.get('EMAIL_USER')
-#EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_PASS')
+EMAIL_HOST_USER = config['EMAIL_USER']
+EMAIL_HOST_PASSWORD = config['EMAIL_PASS']
 
 AUTH_USER_MODEL = 'users.User'
 
