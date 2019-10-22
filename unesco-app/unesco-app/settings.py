@@ -60,7 +60,8 @@ ROOT_URLCONF = 'unesco-app.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        #'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -93,26 +94,26 @@ CHANNEL_LAYERS = {
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
-#DATABASES = {
-#    'default': {
-#        'ENGINE': 'django.db.backends.sqlite3',
-#        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-#        'TEST': {
-#            'NAME': os.path.join(BASE_DIR, 'db_test.sqlite3')
-#        }
-#    }
-#}
-
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'unescodb',
-        'USER': 'unesco_admin',
-        'PASSWORD': 'indigenous123',
-        'HOST': 'localhost',
-        'PORT': '',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'TEST': {
+            'NAME': os.path.join(BASE_DIR, 'db_test.sqlite3')
+        }
     }
 }
+
+#DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#        'NAME': 'unescodb',
+#        'USER': 'unesco_admin',
+#        'PASSWORD': 'indigenous123',
+#        'HOST': 'localhost',
+#        'PORT': '',
+#    }
+#}
 
 
 # Password validation
@@ -178,6 +179,7 @@ EMAIL_HOST_PASSWORD = 'gardenVegetable'
 
 AUTH_USER_MODEL = 'users.User'
 
+DATA_UPLOAD_MAX_MEMORY_SIZE = None
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
