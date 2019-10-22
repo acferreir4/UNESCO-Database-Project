@@ -33,4 +33,16 @@
 __pycache__/
 *.py[cod]
 
+#Visual Studio files
+bin/
+obj/
+projenv/
+.vs/
+*.pyproj
+*.pyproj.user
+
+#DB files
 db.sqlite3
+
+#vim swap file
+*.swp
