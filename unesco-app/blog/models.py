@@ -2,6 +2,7 @@ from django.db import models
 from django.utils import timezone
 from users.models import User
 from django.urls import reverse
+from PIL import Image
 
 class Post(models.Model):
     title = models.CharField(max_length=100)
@@ -18,4 +19,12 @@ class Post(models.Model):
 
     def get_absolute_url(self):
         return reverse('post-detail', kwargs={'pk': self.pk})
+
+    def save(self):
+        super().save()
+        img = Image.open(self.imageAttachment.path)
+        if img.height > 600 or img.width > 600:
+            output_size = (600, 600)
+            img.thumbnail(output_size)
+            img.save(self.imageAttachment.path)
 
