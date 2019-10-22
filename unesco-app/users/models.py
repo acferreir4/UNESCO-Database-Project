@@ -4,7 +4,7 @@ from phonenumber_field.modelfields import PhoneNumberField
 
 class User(AbstractUser):
     phone_number = PhoneNumberField(
-            'Phone number (optional)', 
+            'Phone number', 
             blank=True, 
             null=True, 
             unique=True

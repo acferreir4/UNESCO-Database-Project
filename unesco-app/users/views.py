@@ -2,6 +2,7 @@ import csv
 import random
 import string
 from django.http import HttpResponse
+from openpyxl import Workbook
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth import update_session_auth_hash
@@ -95,7 +96,7 @@ def accessDenied(request):
     return render(request, 'users/access_denied.html')
 
 
-def exportUsers(request):
+def exportUsersCsv(request):
     if not request.user.is_staff:
         return redirect('access-denied')
     # Create the HttpResponse object with the appropriate CSV header.
@@ -129,5 +130,64 @@ def exportUsers(request):
             user.date_joined,
             user.last_login,
             ])
+
+    return response
+
+def exportUsersXlsx(request):
+    if not request.user.is_staff:
+        return redirect('access-denied')
+    # Create the HttpResponse object with the appropriate CSV header.
+    response = HttpResponse(content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+    response['Content-Disposition'] = 'attachment; filename="users.xlsx"'
+
+    workbook = Workbook()
+
+    # Get active worksheet/tab
+    worksheet = workbook.active
+    worksheet.title = 'Users'
+
+    #Define the titles for columns
+    columns = [
+        'Username',
+        'First name',
+        'Last name',
+        'Email',
+        'Institution',
+        'Role',
+        'Admin',
+        'Active',
+        'Date Registered',
+        'Last Login',
+        ]
+    row_num = 1
+
+    # Assign the titles for each cell of the header
+    for col_num, column_title in enumerate(columns, 1):
+        cell = worksheet.cell(row=row_num, column=col_num)
+        cell.value = column_title
+
+    for user in User.objects.order_by('institution'):
+        row_num += 1
+
+        # Define the data for each cell in the row
+        row = [
+            user.username, 
+            user.first_name, 
+            user.last_name, 
+            user.email,
+            user.institution.name,
+            user.role,
+            'Yes' if user.is_staff else 'No',
+            'Yes' if user.is_active else 'No',
+            user.date_joined,
+            user.last_login,
+            ]
+
+        # Assign the data for each cell of the row 
+        for col_num, cell_value in enumerate(row, 1):
+            cell = worksheet.cell(row=row_num, column=col_num)
+            cell.value = cell_value
+
+    workbook.save(response)
 
     return response
