@@ -13,7 +13,7 @@ from django.contrib.auth.decorators import login_required
 @login_required
 def home(request):
     context = {
-        'possts': Post.objects.all()
+        'posts': Post.objects.all()
     }
     return render(request, 'blog/home.html', context) 
 
