@@ -8,7 +8,9 @@ class UserRegisterForm(UserCreationForm):
     email = forms.EmailField()
     phone_number = PhoneNumberField(
             required=False,
-            widget=PhoneNumberPrefixWidget(attrs={'class': 'form-control'}),
+            widget=PhoneNumberInternationalFallbackWidget(),
+            #widget=PhoneNumberPrefixWidget(),
+            #widget=PhoneNumberPrefixWidget(attrs={'class': 'form-control'}),
             #error_messages={'require': 'Enter a valid phone number. Format: +1234567890'}
             )
     password1 = None
