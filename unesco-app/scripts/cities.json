@@ -1,22 +1,370 @@
 [
     {
-        "name": "Toronto", 
-        "country_id": 1
-    }, 
-    {
-        "name": "Vancouver", 
-        "country_id": 1
-    }, 
-    {
-        "name": "New York", 
+        "name": "Beijing", 
         "country_id": 2
     }, 
     {
-        "name": "Porto", 
+        "name": "Baramulla", 
+        "country_id": 42
+    }, 
+    {
+        "name": "Nilai", 
         "country_id": 3
     }, 
     {
-        "name": "Hong Kong", 
-        "country_id": "4"
-    } 
+        "name": "Kuala Lumpur", 
+        "country_id": 3
+    }, 
+    {
+        "name": "Kota Kinabalu", 
+        "country_id": 3
+    },
+    {
+        "name": "Sarawak", 
+        "country_id": 3
+    },
+    {
+        "name": "Tanjong Malim", 
+        "country_id": 3
+    },
+    {
+        "name": "Penang", 
+        "country_id": 3
+    },
+    {
+        "name": "Perak", 
+        "country_id": 3
+    },
+    {
+        "name": "San Isidro", 
+        "country_id": 5
+    },
+    {
+        "name": "Tabuk City", 
+        "country_id": 5
+    },
+    {
+        "name": "Tacloban City", 
+        "country_id": 5
+    },
+    {
+        "name": "Manila", 
+        "country_id": 5
+    },
+    {
+        "name": "Marawi City", 
+        "country_id": 5
+    },
+    {
+        "name": "Pasig City", 
+        "country_id": 5
+    },
+    {
+        "name": "Queensland", 
+        "country_id": 1
+    },
+    {
+        "name": "St. Lucia", 
+        "country_id": 1
+    },
+    {
+        "name": "Sidney", 
+        "country_id": 1
+    },
+    {
+        "name": "Wellington", 
+        "country_id": 4
+    },
+    {
+        "name": "Hamilton", 
+        "country_id": 4
+    },
+    {
+        "name": "Ulaanbaatar", 
+        "country_id": 18
+    },
+    {
+        "name": "Moscow", 
+        "country_id": 19
+    },
+    {
+        "name": "Ulan-Ude", 
+        "country_id": 19
+    },
+    {
+        "name": "Buenos Aires", 
+        "country_id": 20
+    },
+    {
+        "name": "La Paz", 
+        "country_id": 12
+    },
+    {
+        "name": "Tocantis", 
+        "country_id": 13
+    },
+    {
+        "name": "Santa Catarina", 
+        "country_id": 13
+    },
+    {
+        "name": "Santiago/Villarrica", 
+        "country_id": 21
+    },
+    {
+        "name": "Santiago", 
+        "country_id": 21
+    },
+    {
+        "name": "Medellin", 
+        "country_id": 22
+    },
+    {
+        "name": "Azogues", 
+        "country_id": 23
+    },
+    {
+        "name": "Lima", 
+        "country_id": 14
+    },
+    {
+        "name": "Montevideo", 
+        "country_id": 24
+    },
+    {
+        "name": "Gaborone", 
+        "country_id": 25
+    },
+    {
+        "name": "Roma", 
+        "country_id": 15
+    },
+    {
+        "name": "Windhoek", 
+        "country_id": 26
+    },
+    {
+        "name": "Grahamstown", 
+        "country_id": 27
+    },
+    {
+        "name": "Unisa", 
+        "country_id": 27
+    },
+    {
+        "name": "Lusaka", 
+        "country_id": 28
+    },
+    {
+        "name": "Hawassa", 
+        "country_id": 16
+    },
+    {
+        "name": "Addis Ababa", 
+        "country_id": 16
+    },
+    {
+        "name": "Nairobi", 
+        "country_id": 29
+    },
+    {
+        "name": "Uturo", 
+        "country_id": 17
+    },
+    {
+        "name": "Owerri", 
+        "country_id": 17
+    },
+    {
+        "name": "Port Harcourt", 
+        "country_id": 17
+    },
+    {
+        "name": "Lapai", 
+        "country_id": 17
+    },
+    {
+        "name": "Minna", 
+        "country_id": 17
+    },
+    {
+        "name": "Nsukka", 
+        "country_id": 17
+    },
+    {
+        "name": "Abuja", 
+        "country_id": 17
+    },
+    {
+        "name": "Lagos", 
+        "country_id": 17
+    },
+    {
+        "name": "Almaty", 
+        "country_id": 8
+    },
+    {
+        "name": "Osh", 
+        "country_id": 30
+    },
+    {
+        "name": "Dunshabe", 
+        "country_id": 9
+    },
+    {
+        "name": "Ottawa", 
+        "country_id": 10
+    },
+    {
+        "name": "Cape Breton Island", 
+        "country_id": 10
+    },
+    {
+        "name": "Sudbury", 
+        "country_id": 10
+    },
+    {
+        "name": "Peterborough", 
+        "country_id": 10
+    },
+    {
+        "name": "Kahnawake", 
+        "country_id": 10
+    },
+    {
+        "name": "St. John's", 
+        "country_id": 10
+    },
+    {
+        "name": "Kingston", 
+        "country_id": 10
+    },
+    {
+        "name": "Fort Qu'Appelle", 
+        "country_id": 10
+    },
+    {
+        "name": "Winnipeg", 
+        "country_id": 10
+    },
+    {
+        "name": "Regina", 
+        "country_id": 10
+    },
+    {
+        "name": "Saskatoon", 
+        "country_id": 10
+    },
+    {
+        "name": "Montreal", 
+        "country_id": 10
+    },
+    {
+        "name": "Nanaimo", 
+        "country_id": 10
+    },
+    {
+        "name": "Toronto", 
+        "country_id": 10
+    },
+    {
+        "name": "San Jose", 
+        "country_id": 32
+    },
+    {
+        "name": "Heredia", 
+        "country_id": 32
+    },
+    {
+        "name": "Guatemala City", 
+        "country_id": 33
+    },
+    {
+        "name": "Veracruz", 
+        "country_id": 34
+    },
+    {
+        "name": "Chihuahua", 
+        "country_id": 34
+    },
+    {
+        "name": "Guadalajara", 
+        "country_id": 34
+    },
+    {
+        "name": "Kamla", 
+        "country_id": 7
+    },
+    {
+        "name": "Albuquerque", 
+        "country_id": 11
+    },
+    {
+        "name": "Denver", 
+        "country_id": 11
+    },
+    {
+        "name": "Honolulu", 
+        "country_id": 11
+    },
+    {
+        "name": "Flagstaff", 
+        "country_id": 11
+    },
+    {
+        "name": "Pablo", 
+        "country_id": 11
+    },
+    {
+        "name": "El Paso", 
+        "country_id": 11
+    },
+    {
+        "name": "Cairo", 
+        "country_id": 35
+    },
+    {
+        "name": "Riyadh", 
+        "country_id": 36
+    },
+    {
+        "name": "Sami", 
+        "country_id": 39
+    },
+    {
+        "name": "Hualien County", 
+        "country_id": 6
+    },
+    {
+        "name": "Kaohsiung City", 
+        "country_id": 6
+    },
+    {
+        "name": "Taichung City", 
+        "country_id": 6
+    },
+    {
+        "name": "Taitung County", 
+        "country_id": 6
+    },
+    {
+        "name": "Taipei City", 
+        "country_id": 6
+    },
+    {
+        "name": "Hsinchu City", 
+        "country_id": 6
+    },
+    {
+        "name": "Orchid Island", 
+        "country_id": 6
+    },
+    {
+        "name": "Bonn", 
+        "country_id": 40
+    },
+    {
+        "name": "Paris (International)", 
+        "country_id": 41
+    }
 ]
