@@ -38,18 +38,31 @@ with open('scripts/institutions.json') as f_institutions:
 for inst in institutions_json:
     inst = Institution(
             name=inst['name'], 
+            abbreviation=inst['abbreviation'], 
             city_id=inst['city_id'], 
             met=inst['met'], 
             moc=inst['moc'], 
             ethics=inst['ethics'], 
             status_request=inst['status_request'], 
-            ri_1_tools=inst['date'], 
+            is_private=inst['is_private'], 
+            ri_1_tools=inst['ri_1_tools'], 
             general=inst['general'], 
             role=inst['role'], 
-            is_private=inst['is_private'], 
             type_of_inst=inst['type_of_inst'], 
             student_count=inst['student_count'], 
-            staff_count=inst['staff_count']
+            staff_count=inst['staff_count'],
+            internet_access=inst['internet_access'],
+            online=inst['online'],
+            guest_lectures=inst['guest_lectures'],
+            environment=inst['environment'],
+            focus_pst=inst['focus_pst'],
+            further=inst['further'],
+            school_size=inst['school_size'],
+            community_size=inst['community_size'],
+            girl_ratio=inst['girl_ratio'],
+            qualifications=inst['qualifications'],
+            percent_indigenous=inst['percent_indigenous'],
+            age=inst['age']
             )
     inst.save()
 
@@ -63,8 +76,8 @@ MainRoom.save()
 
 user = User(
         username='admin', 
-        first_name='Andrew', 
-        last_name='Ferreira',
+        first_name='admin', 
+        last_name='istrator',
         email='admin@admin.com',
         is_staff=True,
         is_active=True,

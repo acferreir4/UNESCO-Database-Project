@@ -1,6 +1,15 @@
 from django.contrib import admin
 from .models import DynamicForms, Questions, DataTable
+from django.forms import TextInput, Textarea, NumberInput
+from django.db import models
 
-admin.site.register(DynamicForms)
-admin.site.register(Questions)
-admin.site.register(DataTable)
+class DynamicFormModelAdmin(admin.ModelAdmin):
+    formfield_overrides = {
+        models.CharField: {'widget': TextInput(attrs={'size':'25'})},
+        models.IntegerField: {'widget': NumberInput(attrs={'size':'25'})},
+        models.TextField: {'widget': Textarea(attrs={'rows':4, 'cols':40})},
+    }
+
+admin.site.register(DynamicForms, DynamicFormModelAdmin)
+admin.site.register(Questions, DynamicFormModelAdmin)
+admin.site.register(DataTable, DynamicFormModelAdmin)
