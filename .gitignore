@@ -37,6 +37,7 @@ __pycache__/
 bin/
 obj/
 projenv/
+venv/
 .vs/
 *.pyproj
 *.pyproj.user
