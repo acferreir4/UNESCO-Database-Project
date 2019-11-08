@@ -1,17 +1,30 @@
 [
-    {
-        "name": "York University", 
-        "city_id": 1, 
-        "met": "True",
-        "moc": "False",
-        "ethics": "False",
-        "status_request": "False",
-        "date": "2019-01-01",
-        "general": "York U",
-        "role": "University",
-        "is_private": "False",
-        "type_of_inst": "University",
-        "student_count": 5,
-        "staff_count": 2
-    } 
+  {
+    "name": "York University",
+    "abbreviation": "YU",
+    "city_id": 67,
+    "met": "False",
+    "moc": "False",
+    "ethics": "False",
+    "status_request": "False",
+    "is_private": "False",
+    "ri_1_tools": "2019-01-01",
+    "general": "",
+    "role": "Research",
+    "type_of_inst": "University",
+    "student_count": 55700,
+    "staff_count": 7000,
+    "internet_access": "yes",
+    "online": "yes",
+    "guest_lectures": "often",
+    "environment": "frequently",
+    "focus_pst": "tertiary",
+    "further": "",
+    "school_size": "0",
+    "community_size": "0",
+    "girl_ratio": 50,
+    "qualifications": "Bachelor",
+    "percent_indigenous": 2.4,
+    "age": 2
+  }
 ]

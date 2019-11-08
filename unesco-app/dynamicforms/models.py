@@ -9,6 +9,9 @@ class DataTable(models.Model):
     submitter_id = models.ForeignKey('users.User', on_delete=models.PROTECT)
     answer = models.TextField()
     is_draft = models.BooleanField(default=True)
+
+    class Meta:
+        verbose_name_plural = "Answers"
     
 class DynamicForms(models.Model):
     #Change creator_id back to user foreign key to user
@@ -20,7 +23,7 @@ class DynamicForms(models.Model):
     expiry_date = models.DateTimeField(default=date.today)
 
     class Meta:
-        verbose_name_plural = "DynamicForms"
+        verbose_name_plural = "Questionnaire Forms"
 
     def __str__(self):
         return self.title

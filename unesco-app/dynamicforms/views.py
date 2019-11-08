@@ -1,5 +1,6 @@
 import csv
 from django.http import HttpResponse
+from openpyxl import Workbook
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
@@ -308,40 +309,57 @@ def __build_answer_context(request, form_pk):
     return context
 
 def export_form(request):
-    """Return a CSV file of USERNAME, Q1, Q2, ... QN for all users that answered the
-    form"""
+    """Return a CSV file of USERNAME, Q1, Q2, ... QN for all users that answered the form"""
     # Get the form object from id
     form = DynamicForms.objects.get(id=request.GET.get('download'))
 
     # Prepare the HttpResponse object
-    response = HttpResponse(content_type='text/csv')
-    response['Content-Disposition'] = 'attachment; filename="{}.csv"'.format(form.title)
-    writer = csv.writer(response)
+    response = HttpResponse(content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+    #response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename="{}.xlsx"'.format(form.title)
+    #response['Content-Disposition'] = 'attachment; filename="{}.csv"'.format(form.title)
+
+    #writer = csv.writer(response)
+    workbook = Workbook()
+    worksheet = workbook.active
+    worksheet.title = form.title
 
     # Construct CSV columns with username and questions in form
-    csv_columns = ['Username', 'Institution',]
+    columns = ['Username', 'Institution',]
     questions = Questions.objects.filter(form_id=form)
     for question in questions:
-        csv_columns.append(question.question_text)
-    writer.writerow(csv_columns)
+        columns.append(question.question_text)
+    #writer.writerow(columns)
+    row_num = 1
+
+    # Assign the titles for each cell of the header
+    for col_num, column_title in enumerate(columns, 1):
+        cell = worksheet.cell(row=row_num, column=col_num)
+        cell.value = column_title
     
     # Populate CSV with columns of all users who answered form & their answers
     # If a user answered a question and it's not a draft, then it can be assumed that
     # they answered the whole form
-    respondents = DataTable.objects.filter(form_id=form, question_id=question,
-                                           is_draft=False)
+    respondents = DataTable.objects.filter(form_id=form, question_id=question, is_draft=False)
+
     # For each person who answered the form
     for respondent in respondents:
-        # Get their username
+        row_num += 1
+
         user = respondent.submitter_id
         username = user.username
         institution = user.institution.name
-        csv_row = [username, institution]
+        row = [username, institution]
         # Get all their answers
         answers = DataTable.objects.filter(submitter_id=user, form_id=form)
         for answer in answers:
-            csv_row.append(answer.answer)
-        # Write the row
-        writer.writerow(csv_row)
+            row.append(answer.answer)
 
+        # Assign the data for each cell of the row 
+        for col_num, cell_value in enumerate(row, 1):
+            cell = worksheet.cell(row=row_num, column=col_num)
+            cell.value = cell_value
+
+        #writer.writerow(row)
+    workbook.save(response)
     return response

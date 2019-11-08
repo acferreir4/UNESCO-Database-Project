@@ -1,13 +1,17 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from .models import User, Profile
-from phonenumber_field.modelfields import PhoneNumberField
-from phonenumber_field.widgets import PhoneNumberPrefixWidget
+from phonenumber_field.formfields import PhoneNumberField
+from phonenumber_field.widgets import PhoneNumberInternationalFallbackWidget, PhoneNumberPrefixWidget
 
 class UserRegisterForm(UserCreationForm):
     email = forms.EmailField()
     phone_number = PhoneNumberField(
-            error_messages={'require': 'Enter a valid phone number. Format: +1234567890'}
+            required=False,
+            widget=PhoneNumberInternationalFallbackWidget(),
+            #widget=PhoneNumberPrefixWidget(),
+            #widget=PhoneNumberPrefixWidget(attrs={'class': 'form-control'}),
+            #error_messages={'require': 'Enter a valid phone number. Format: +1234567890'}
             )
     password1 = None
     password2 = None

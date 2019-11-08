@@ -43,7 +43,7 @@ urlpatterns = [
         name='password_reset_complete'),
 ]
 
-admin.site.site_header = "UNESCO Administration"
+admin.site.site_header = "UNESCO Home"
 admin.site.site_title = "UNESCO Administration"
 admin.site.index_title = "Site Administration"
 

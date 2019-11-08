@@ -1,7 +1,6 @@
 {% extends "blog/base.html" %}
 {% block content %}
     {% for post in posts %}
-    {% if user.is_staff %}
         <article class="media content-section">
           <div class="media-body">
             <div class="article-metadata">
@@ -11,31 +10,16 @@
             <h2><a class="article-title" href="{% url 'post-detail' post.id %}">{{ post.title }}</a></h2>
             <p class="article-content">{{ post.content }}</p>
             {% if post.fileAttachment %}
-            <a href="{{ post.fileAttachment.url }}"class="btn btn-primary mb-4"> View File </a>
+            {#<a href="{{ post.fileAttachment.url }}"class="btn btn-primary mb-4"> View File </a>#}
+            <a href="{{ post.fileAttachment }}"> {{ post.imageAttachment }} </a>
             {% endif %}
             {% if post.imageAttachment %}
-            <a href="{{ post.imageAttachment.url }}"class="btn btn-primary mb-4"> View Image </a>
+            <a href="{{ post.imageAttachment.url }}">
+            <img style="width: 100%; height: auto; object-fit: contain" src="{{ post.imageAttachment.url }}"/>
+            </a>
             {% endif %}
           </div>
         </article>
-    {% else %}
-        <article class="media content-section">
-          <div class="media-body">
-            <div class="article-metadata">
-                <a class="mr-2" href="{% url 'user-posts' post.author.username %}">{{ post.author }}</a>
-              <small class="text-muted">{{ post.date_posted|date:"F j, Y" }}</small>
-            </div>
-            <h2><a class="article-title" href="{% url 'post-detail' post.id %}">{{ post.title }}</a></h2>
-            <p class="article-content">{{ post.content }}</p>
-            {% if post.fileAttachment %}
-            <a href="{{ post.fileAttachment.url }}"class="btn btn-primary mb-4"> View File </a>
-            {% endif %}
-            {% if post.imageAttachment %}
-            <a href="{{ post.imageAttachment.url }}"class="btn btn-primary mb-4"> View Image </a>
-            {% endif %}
-          </div>
-        </article>
-    {% endif %}
     {% endfor %}
     {% if is_paginated %}
 

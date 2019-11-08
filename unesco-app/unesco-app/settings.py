@@ -65,7 +65,8 @@ ROOT_URLCONF = 'unesco-app.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        #'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -119,6 +120,17 @@ else:
             'PORT': '',
         }
     }
+
+#DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#        'NAME': 'unescodb',
+#        'USER': 'unesco_admin',
+#        'PASSWORD': 'indigenous123',
+#        'HOST': 'localhost',
+#        'PORT': '',
+#    }
+#}
 
 
 # Password validation
@@ -184,6 +196,7 @@ EMAIL_HOST_PASSWORD = config['EMAIL_PASS']
 
 AUTH_USER_MODEL = 'users.User'
 
+DATA_UPLOAD_MAX_MEMORY_SIZE = None
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to

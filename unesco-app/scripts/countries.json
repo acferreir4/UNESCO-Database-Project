@@ -1,42 +1,422 @@
 [
     {
+        "name": "Australia", 
+        "population": 24916987, 
+        "percent_indigenous": 2.8,
+        "percent_gdp_on_ed": 5.1,
+        "definition": "",
+        "average_education": "",
+        "strategy": "",
+        "continent": "Australia"
+    }, 
+    {
+        "name": "China", 
+        "population": 1386000000, 
+        "percent_indigenous": 0,
+        "percent_gdp_on_ed": 0,
+        "definition": "",
+        "average_education": "",
+        "strategy": "",
+        "continent": "Asia"
+    }, 
+    {
+        "name": "Malaysia", 
+        "population": 32000000, 
+        "percent_indigenous": 1.0,
+        "percent_gdp_on_ed": 5.1,
+        "definition": "Orang Asli/Ministry",
+        "average_education": "",
+        "strategy": "",
+        "continent": "Asia"
+    }, 
+    {
+        "name": "New Zealand", 
+        "population": 4800000, 
+        "percent_indigenous": 22.0,
+        "percent_gdp_on_ed": 5.2,
+        "definition": "",
+        "average_education": "",
+        "strategy": "Yes",
+        "continent": "Australia"
+    }, 
+    {
+        "name": "Philippines", 
+        "population": 106000000, 
+        "percent_indigenous": 11.0,
+        "percent_gdp_on_ed": 2.7,
+        "definition": "UN/NCIP/National",
+        "average_education": "Secondary",
+        "strategy": "Yes",
+        "continent": "Asia"
+    }, 
+    {
+        "name": "Taiwan", 
+        "population": 23570000, 
+        "percent_indigenous": 2.4,
+        "percent_gdp_on_ed": 5.2,
+        "definition": "National",
+        "average_education": "Secondary",
+        "strategy": "Outdoor",
+        "continent": "Asia"
+    }, 
+    {
+        "name": "Nicaragua", 
+        "population": 6169688, 
+        "percent_indigenous": 8.6,
+        "percent_gdp_on_ed": 4.7,
+        "definition": "National",
+        "average_education": "",
+        "strategy": "",
+        "continent": "South America"
+    }, 
+    {
+        "name": "Kazakhstan", 
+        "population": 18040000, 
+        "percent_indigenous": 0,
+        "percent_gdp_on_ed": 3.0,
+        "definition": "",
+        "average_education": "",
+        "strategy": "",
+        "continent": "Asia"
+    }, 
+    {
+        "name": "Tajikistan", 
+        "population": 8921000, 
+        "percent_indigenous": 0,
+        "percent_gdp_on_ed": 5.2,
+        "definition": "",
+        "average_education": "",
+        "strategy": "",
+        "continent": "Asia"
+    }, 
+    {
         "name": "Canada", 
-        "population": 30000000, 
-        "percent_indigenous": 12.3,
-        "percent_gdp_on_ed": 11.3,
-        "definition": "polite people",
-        "average_education": "Bachelors Degree",
-        "strategy": "Maple Syrup",
+        "population": 37590000, 
+        "percent_indigenous": 5.7,
+        "percent_gdp_on_ed": 5.5,
+        "definition": "Constitution",
+        "average_education": "",
+        "strategy": "",
         "continent": "North America"
     }, 
     {
         "name": "United States", 
-        "population": 300000000, 
-        "percent_indigenous": 12.3,
-        "percent_gdp_on_ed": 11.3,
-        "definition": "fat people",
-        "average_education": "Bachelors Degree",
-        "strategy": "Coca Cola",
+        "population": 325700000, 
+        "percent_indigenous": 2.0,
+        "percent_gdp_on_ed": 4.9,
+        "definition": "",
+        "average_education": "",
+        "strategy": "",
         "continent": "North America"
     }, 
     {
-        "name": "Portugal", 
-        "population": 30000000, 
-        "percent_indigenous": 12.3,
-        "percent_gdp_on_ed": 11.3,
-        "definition": "like fish",
-        "average_education": "Bachelors Degree",
-        "strategy": "obrigado",
-        "continent": "Europe"
+        "name": "Bolivia", 
+        "population": 10000000, 
+        "percent_indigenous": 60.0,
+        "percent_gdp_on_ed": 7.6,
+        "definition": "No",
+        "average_education": "Primary",
+        "strategy": "Primary",
+        "continent": "South America"
     }, 
     {
-        "name": "China", 
-        "population": 50000000, 
-        "percent_indigenous": 15.8,
-        "percent_gdp_on_ed": 10.3,
-        "definition": "toys come from here",
-        "average_education": "High School",
-        "strategy": "industrial superiority",
+        "name": "Brazil", 
+        "population": 209300000, 
+        "percent_indigenous": 0,
+        "percent_gdp_on_ed": 5.9,
+        "definition": "Constitution",
+        "average_education": "",
+        "strategy": "",
+        "continent": "South America"
+    }, 
+    {
+        "name": "Peru", 
+        "population": 31036656, 
+        "percent_indigenous": 0,
+        "percent_gdp_on_ed": 3.9,
+        "definition": "Constitution",
+        "average_education": "",
+        "strategy": "",
+        "continent": "South America"
+    }, 
+    {
+        "name": "Lesotho", 
+        "population": 2233000, 
+        "percent_indigenous": 0,
+        "percent_gdp_on_ed": 13.0,
+        "definition": "",
+        "average_education": "",
+        "strategy": "",
+        "continent": "Africa"
+    }, 
+    {
+        "name": "Ethiopia", 
+        "population": 9430000, 
+        "percent_indigenous": 10.0,
+        "percent_gdp_on_ed": 4.5,
+        "definition": "Constitution",
+        "average_education": "",
+        "strategy": "",
+        "continent": "Africa"
+    }, 
+    {
+        "name": "Nigeria", 
+        "population": 185000000, 
+        "percent_indigenous": 85.0,
+        "percent_gdp_on_ed": 8.0,
+        "definition": "No, only UN definitions",
+        "average_education": "",
+        "strategy": "",
+        "continent": "Africa"
+    },
+    {
+        "name": "Mongolia", 
+        "population": 3076000, 
+        "percent_indigenous": 0,
+        "percent_gdp_on_ed": 0,
+        "definition": "",
+        "average_education": "",
+        "strategy": "",
         "continent": "Asia"
-    } 
+    },
+    {
+        "name": "Russia", 
+        "population": 144500000, 
+        "percent_indigenous": 0,
+        "percent_gdp_on_ed": 0,
+        "definition": "",
+        "average_education": "",
+        "strategy": "",
+        "continent": "Asia"
+    },
+    {
+        "name": "Argentina", 
+        "population": 44270000, 
+        "percent_indigenous": 0,
+        "percent_gdp_on_ed": 0,
+        "definition": "",
+        "average_education": "",
+        "strategy": "",
+        "continent": "South America"
+    },
+    {
+        "name": "Chile", 
+        "population": 18050000, 
+        "percent_indigenous": 0,
+        "percent_gdp_on_ed": 0,
+        "definition": "",
+        "average_education": "",
+        "strategy": "",
+        "continent": "South America"
+    },
+    {
+        "name": "Colombia", 
+        "population": 49070000, 
+        "percent_indigenous": 0,
+        "percent_gdp_on_ed": 0,
+        "definition": "",
+        "average_education": "",
+        "strategy": "",
+        "continent": "South America"
+    },
+    {
+        "name": "Ecuador", 
+        "population": 16620000, 
+        "percent_indigenous": 0,
+        "percent_gdp_on_ed": 0,
+        "definition": "",
+        "average_education": "",
+        "strategy": "",
+        "continent": "South America"
+    },
+    {
+        "name": "Uruguay", 
+        "population": 3457000, 
+        "percent_indigenous": 0,
+        "percent_gdp_on_ed": 0,
+        "definition": "",
+        "average_education": "",
+        "strategy": "",
+        "continent": "South America"
+    },
+    {
+        "name": "Botswana", 
+        "population": 2303697, 
+        "percent_indigenous": 0,
+        "percent_gdp_on_ed": 0,
+        "definition": "",
+        "average_education": "",
+        "strategy": "",
+        "continent": "Africa"
+    },
+    {
+        "name": "Namibia", 
+        "population": 2490000, 
+        "percent_indigenous": 0,
+        "percent_gdp_on_ed": 0,
+        "definition": "",
+        "average_education": "",
+        "strategy": "",
+        "continent": "Africa"
+    },
+    {
+        "name": "South Africa", 
+        "population": 58558270, 
+        "percent_indigenous": 0,
+        "percent_gdp_on_ed": 0,
+        "definition": "",
+        "average_education": "",
+        "strategy": "",
+        "continent": "Africa"
+    },
+    {
+        "name": "Zambia", 
+        "population": 17860000, 
+        "percent_indigenous": 0,
+        "percent_gdp_on_ed": 0,
+        "definition": "",
+        "average_education": "",
+        "strategy": "",
+        "continent": "Africa"
+    },
+    {
+        "name": "Kenya", 
+        "population": 52570000, 
+        "percent_indigenous": 0,
+        "percent_gdp_on_ed": 0,
+        "definition": "",
+        "average_education": "",
+        "strategy": "",
+        "continent": "Africa"
+    },
+    {
+        "name": "Kyrgyzstan", 
+        "population": 6420000, 
+        "percent_indigenous": 0,
+        "percent_gdp_on_ed": 0,
+        "definition": "",
+        "average_education": "",
+        "strategy": "",
+        "continent": "Asia"
+    },
+    {
+        "name": "Uzbekistan", 
+        "population": 32981716, 
+        "percent_indigenous": 0,
+        "percent_gdp_on_ed": 0,
+        "definition": "",
+        "average_education": "",
+        "strategy": "",
+        "continent": "Asia"
+    },
+    {
+        "name": "Costa Rica", 
+        "population": 5050000, 
+        "percent_indigenous": 0,
+        "percent_gdp_on_ed": 0,
+        "definition": "",
+        "average_education": "",
+        "strategy": "",
+        "continent": "South America"
+    },
+    {
+        "name": "Guatemala", 
+        "population": 17580000, 
+        "percent_indigenous": 0,
+        "percent_gdp_on_ed": 0,
+        "definition": "",
+        "average_education": "",
+        "strategy": "",
+        "continent": "South America"
+    },
+    {
+        "name": "Mexico", 
+        "population": 127575529, 
+        "percent_indigenous": 0,
+        "percent_gdp_on_ed": 0,
+        "definition": "",
+        "average_education": "",
+        "strategy": "",
+        "continent": "South America"
+    },
+    {
+        "name": "Egypt", 
+        "population": 100388073, 
+        "percent_indigenous": 0,
+        "percent_gdp_on_ed": 0,
+        "definition": "",
+        "average_education": "",
+        "strategy": "",
+        "continent": "Africa"
+    },
+    {
+        "name": "Saudi Arabia", 
+        "population": 127575529, 
+        "percent_indigenous": 0,
+        "percent_gdp_on_ed": 0,
+        "definition": "",
+        "average_education": "",
+        "strategy": "",
+        "continent": "Asia"
+    },
+    {
+        "name": "Finland", 
+        "population": 5530000, 
+        "percent_indigenous": 0,
+        "percent_gdp_on_ed": 0,
+        "definition": "",
+        "average_education": "",
+        "strategy": "",
+        "continent": "Europe"
+    },
+    {
+        "name": "Sweden", 
+        "population": 10040000, 
+        "percent_indigenous": 0,
+        "percent_gdp_on_ed": 0,
+        "definition": "",
+        "average_education": "",
+        "strategy": "",
+        "continent": "Europe"
+    },
+    {
+        "name": "Norway", 
+        "population": 5328000, 
+        "percent_indigenous": 0,
+        "percent_gdp_on_ed": 0,
+        "definition": "",
+        "average_education": "",
+        "strategy": "",
+        "continent": "Europe"
+    },
+    {
+        "name": "Germany", 
+        "population": 83520000, 
+        "percent_indigenous": 0,
+        "percent_gdp_on_ed": 0,
+        "definition": "",
+        "average_education": "",
+        "strategy": "",
+        "continent": "Europe"
+    },
+    {
+        "name": "International", 
+        "population": 0, 
+        "percent_indigenous": 0,
+        "percent_gdp_on_ed": 0,
+        "definition": "",
+        "average_education": "",
+        "strategy": "",
+        "continent": "International"
+    },
+    {
+        "name": "India", 
+        "population": 1366417754, 
+        "percent_indigenous": 0,
+        "percent_gdp_on_ed": 0,
+        "definition": "",
+        "average_education": "",
+        "strategy": "",
+        "continent": "Asia"
+    }
 ]
