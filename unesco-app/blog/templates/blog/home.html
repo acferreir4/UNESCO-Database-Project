@@ -10,12 +10,11 @@
             <h2><a class="article-title" href="{% url 'post-detail' post.id %}">{{ post.title }}</a></h2>
             <p class="article-content">{{ post.content }}</p>
             {% if post.fileAttachment %}
-            {#<a href="{{ post.fileAttachment.url }}"class="btn btn-primary mb-4"> View File </a>#}
-            <a href="{{ post.fileAttachment }}"> {{ post.imageAttachment }} </a>
+            <a href="{{ post.fileAttachment.url }}">File Attachment</a>
             {% endif %}
             {% if post.imageAttachment %}
             <a href="{{ post.imageAttachment.url }}">
-            <img style="width: 100%; height: auto; object-fit: contain" src="{{ post.imageAttachment.url }}"/>
+                <img style="width: 100%; height: auto; object-fit: contain" src="{{ post.imageAttachment.url }}"/>
             </a>
             {% endif %}
           </div>

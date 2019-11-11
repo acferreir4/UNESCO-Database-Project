@@ -53,14 +53,14 @@ class Institution(models.Model):
         ("passive", "Passive"),
         ("active", "Active"),
     )
-    general = models.CharField(max_length=10, choices=general_choices, blank=True)
+    general = models.CharField(max_length=10, choices=general_choices, blank=True, default="active")
 
     role_choices = (
         ("research", "Research"),
         ("coordination", "Coordination"),
         ("government", "Government"),
     )
-    role = models.CharField(max_length=15, choices=role_choices)
+    role = models.CharField(max_length=15, choices=role_choices, default="research")
 
     inst_choices = (
         ("university", "University"),
@@ -68,7 +68,7 @@ class Institution(models.Model):
         ("college", "College"),
         ("rce", "RCE"),
     )
-    type_of_inst = models.CharField('Type of institution', max_length=15, choices=inst_choices)
+    type_of_inst = models.CharField('Type of institution', max_length=15, choices=inst_choices, default="university")
 
     student_count = models.IntegerField(validators=[MinValueValidator(0)])
 
@@ -79,7 +79,7 @@ class Institution(models.Model):
         ("none", "None"),
         ("seldom", "Seldom"),
     )
-    internet_access = models.CharField(max_length=10, choices=internet_choices, blank=True)
+    internet_access = models.CharField(max_length=10, choices=internet_choices, blank=True, default="yes")
 
     online_choices = (
         ("yes", "Yes"),
@@ -87,7 +87,7 @@ class Institution(models.Model):
         ("seldom", "Seldom"),
         ("often", "Often"),
     )
-    online = models.CharField('Use of online learning material', max_length=10, choices=online_choices, blank=True)
+    online = models.CharField('Use of online learning material', max_length=10, choices=online_choices, blank=True, default="yes")
 
     guest_choices = (
         ("often", "Often"),
@@ -95,7 +95,7 @@ class Institution(models.Model):
         ("seldom", "Seldom"),
         ("never", "Never"),
     )
-    guest_lectures = models.CharField(max_length=15, choices=guest_choices, blank=True)
+    guest_lectures = models.CharField(max_length=15, choices=guest_choices, blank=True, default="never")
 
     env_choices = (
         ("often", "Often"),
@@ -103,7 +103,7 @@ class Institution(models.Model):
         ("seldom", "Seldom"),
         ("never", "Never"),
     )
-    environment = models.CharField(max_length=15, choices=env_choices, blank=True)
+    environment = models.CharField(max_length=15, choices=env_choices, blank=True, default="never")
 
     pst_choices = (
         ("all", "All"),
@@ -113,9 +113,9 @@ class Institution(models.Model):
         ("kindergarten", "Kindergarten"),
         ("undefined", "Not yet defined"),
     )
-    focus_pst = models.CharField('Focus on K/P/S/T', max_length=15, choices=pst_choices, blank=True, default="")
+    focus_pst = models.CharField('Focus on K/P/S/T', max_length=15, choices=pst_choices, blank=True, default="undefined")
 
-    further = models.CharField('Further levels of education', max_length=50, blank=True)
+    further = models.CharField('Further levels of education', max_length=50, blank=True, default="")
 
     school_size = models.IntegerField(
             validators=[MinValueValidator(0)], 
@@ -141,7 +141,7 @@ class Institution(models.Model):
         ("phd", "PhD"),
         ("certificate", "Certificate"),
     )
-    qualifications = models.CharField(max_length=15, choices=qual_choices, blank=True)
+    qualifications = models.CharField(max_length=15, choices=qual_choices, blank=True, default="bachelor")
 
     percent_indigenous = models.FloatField(
             'Percentage of indigenous students',
@@ -171,7 +171,7 @@ class ResearchInstituteContact(models.Model):
         ("master", "Master"),
         ("bachelor", "Bachelor"),
     )
-    degree = models.CharField(max_length=10, choices=degree_choices, blank=True)
+    degree = models.CharField(max_length=10, choices=degree_choices, blank=True, default="bachelor")
 
     class Meta:
         verbose_name_plural = "Research Institution Contacts"

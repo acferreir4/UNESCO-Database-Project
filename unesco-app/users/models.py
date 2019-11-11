@@ -3,12 +3,13 @@ from django.contrib.auth.models import AbstractUser
 from phonenumber_field.modelfields import PhoneNumberField
 
 class User(AbstractUser):
-    phone_number = PhoneNumberField(
-            'Phone number', 
-            blank=True, 
-            null=True, 
-            unique=True
-            )
+    phone_number = models.CharField(max_length=20)
+    #phone_number = PhoneNumberField(
+            #'Phone number', 
+            #blank=True, 
+            #null=True, 
+            #unique=True
+            #)
     role = models.CharField(max_length=150, default='Researcher', blank=True, null=True)
     institution = models.ForeignKey('institutions.Institution', on_delete=models.PROTECT)
 

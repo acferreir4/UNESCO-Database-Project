@@ -6,13 +6,14 @@ from phonenumber_field.widgets import PhoneNumberInternationalFallbackWidget, Ph
 
 class UserRegisterForm(UserCreationForm):
     email = forms.EmailField()
-    phone_number = PhoneNumberField(
-            required=False,
-            widget=PhoneNumberInternationalFallbackWidget(),
+    phone_number = forms.CharField()
+    #phone_number = PhoneNumberField(
+            #required=False,
+            #widget=PhoneNumberInternationalFallbackWidget(),
             #widget=PhoneNumberPrefixWidget(),
             #widget=PhoneNumberPrefixWidget(attrs={'class': 'form-control'}),
             #error_messages={'require': 'Enter a valid phone number. Format: +1234567890'}
-            )
+            #)
     password1 = None
     password2 = None
 
@@ -25,9 +26,10 @@ class UserRegisterForm(UserCreationForm):
 
 class UserUpdateForm(forms.ModelForm):
     email = forms.EmailField()
-    phone_number = PhoneNumberField(
-            error_messages={'require': 'Enter a valid phone number. Format: +1234567890'}
-            )
+    phone_number = forms.CharField()
+    #phone_number = PhoneNumberField(
+            #error_messages={'require': 'Enter a valid phone number. Format: +1234567890'}
+            #)
 
     class Meta:
         model = User

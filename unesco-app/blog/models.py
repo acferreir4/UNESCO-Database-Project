@@ -22,9 +22,10 @@ class Post(models.Model):
 
     def save(self):
         super().save()
-        img = Image.open(self.imageAttachment.path)
-        if img.height > 600 or img.width > 600:
-            output_size = (600, 600)
-            img.thumbnail(output_size)
-            img.save(self.imageAttachment.path)
+        if self.imageAttachment:
+            img = Image.open(self.imageAttachment.path)
+            if img.height > 600 or img.width > 600:
+                output_size = (600, 600)
+                img.thumbnail(output_size)
+                img.save(self.imageAttachment.path)
 
