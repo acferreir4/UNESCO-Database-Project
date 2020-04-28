@@ -26,6 +26,7 @@ setup(
         "django-crispy-forms",
 	"channels_redis",
 	"channels",
+	"openpyxl",
 	"pillow",
     ],
 )
